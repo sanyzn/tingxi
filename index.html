@@ -138,6 +138,30 @@ h2 { margin: .2rem 0 .8rem; font-size: 1.5rem; }
 .mini-open span { display: block; font-size: .85rem; }
 .mini-open b { display: block; font-size: 1.1rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .mini-stop { min-width: 5rem; border: 0; border-radius: .8rem; background: #fff; color: var(--dark); font-size: 1.15rem; font-weight: 700; }
+
+/* 桌面版:本地音视频 */
+.item.off { opacity: .65; cursor: default; }
+.item .warn { color: #A3231A; font-weight: 700; }
+.local-tools { margin: 0 0 14px; padding: .8rem 1rem; background: var(--card); border: 2px solid var(--line); border-radius: .9rem; font-size: 1rem; word-break: break-all; }
+.local-tools[hidden] { display: none; }
+.local-tools .row { display: grid; grid-template-columns: 1fr 1fr; grid-gap: 12px; margin-top: .6rem; }
+.local-tools button { min-height: 3.4rem; border: 2px solid var(--ink); border-radius: .8rem; background: var(--bg); font-weight: 700; }
+.screen video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: transparent; }
+.audio-art {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+  padding: 1rem 1rem 3.5rem; background: #3A1712; color: #FFE7A3; font-size: 1.6rem; font-weight: 700; text-align: center;
+}
+.audio-art[hidden] { display: none; }
+
+/* 电脑屏幕(网页版和桌面版都适用):剧种四列、唱段两列,播放页左边画面、右边按钮 */
+@media (min-width: 1000px) {
+  main { max-width: 1180px; }
+  .grid { grid-template-columns: repeat(4, 1fr); }
+  .items { display: grid; grid-template-columns: 1fr 1fr; grid-gap: 12px; }
+  .items li { margin: 0; }
+  .player:not(.parked) .pl-wrap { display: grid; grid-template-columns: 1.7fr 1fr; grid-gap: 0 28px; align-items: start; }
+  .pl-side .controls:first-child { margin-top: 0; }
+}
 </style>
 </head>
 <body>
@@ -168,7 +192,7 @@ h2 { margin: .2rem 0 .8rem; font-size: 1.5rem; }
         <button type="button" data-size="huge">特大</button>
       </div>
     </div>
-    <p class="foot">唱段视频都在哔哩哔哩（B站）上，由各位上传者分享，这里只做挑选整理，不存音视频。听戏要联网，用手机流量会比较费，最好连上无线网（WiFi）。</p>
+    <p class="foot" id="foot">唱段视频都在哔哩哔哩（B站）上，由各位上传者分享，这里只做挑选整理，不存音视频。听戏要联网，用手机流量会比较费，最好连上无线网（WiFi）。</p>
   </section>
 
   <section id="v-more" class="view">
@@ -178,19 +202,32 @@ h2 { margin: .2rem 0 .8rem; font-size: 1.5rem; }
 
   <section id="v-list" class="view">
     <h2 id="listTitle"></h2>
+    <div id="localTools" class="local-tools" hidden>
+      <div>本地唱段放在：<b id="localDir"></b></div>
+      <div class="row">
+        <button id="openDirBtn" type="button">打开这个文件夹</button>
+        <button id="refreshBtn" type="button">放好了，刷新列表</button>
+      </div>
+    </div>
     <button id="playAllBtn" class="wide" type="button">从第一段开始，连着听</button>
     <ol id="list" class="items"></ol>
   </section>
 
   <section id="v-player" class="player parked" aria-label="正在播放">
+   <div class="pl-wrap">
+    <div class="pl-main">
     <div class="now-aria" id="pAria"></div>
     <div class="now-meta" id="pMeta"></div>
     <div class="screen">
       <iframe id="frame" title="唱段播放器" src="about:blank" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen scrolling="no"></iframe>
+      <div id="audioArt" class="audio-art" hidden></div>
+      <video id="media" controls preload="metadata" playsinline hidden></video>
       <div id="overlay" class="overlay" hidden></div>
     </div>
-    <p class="hint">没有声音？点一下画面，再点画面上的 ▶ 播放键或小喇叭。<br>画面上写着「非常抱歉…无法正常播放」？点「下一段」换一段听，过一会儿再回来试。</p>
+    <p class="hint" id="hint">没有声音？点一下画面，再点画面上的 ▶ 播放键或小喇叭。<br>画面上写着「非常抱歉…无法正常播放」？点「下一段」换一段听，过一会儿再回来试。</p>
     <div id="banner" class="banner" role="status" aria-live="polite" hidden></div>
+    </div>
+    <div class="pl-side">
     <div class="controls">
       <button id="playBtn" class="ctl primary" type="button"></button>
       <button id="prevBtn" class="ctl" type="button"><svg><use href="#i-prev"/></svg>上一段</button>
@@ -205,6 +242,8 @@ h2 { margin: .2rem 0 .8rem; font-size: 1.5rem; }
       <button id="listBtn" class="ctl small" type="button">唱段列表<small>回去挑别的</small></button>
     </div>
     <p class="src" id="pSrc"></p>
+    </div>
+   </div>
   </section>
 </main>
 
@@ -299,7 +338,108 @@ h2 { margin: .2rem 0 .8rem; font-size: 1.5rem; }
 {"genre": "川剧", "play": "别宫出征", "aria": "坐着坐着生杀气", "artist": "陈书舫", "school": "", "bvid": "BV1kK411n7uP", "p": 1, "t": 0, "dur": 133, "note": "高腔", "src": "周浦大宝贝｜【川剧名家名段（高腔）】《别宫出征》“坐着坐着生杀气”陈书舫"},
 {"genre": "川剧", "play": "思凡", "aria": "思凡", "artist": "沈铁梅", "school": "", "bvid": "BV11b411x7Be", "p": 1, "t": 0, "dur": 482, "note": "", "src": "女裙钗｜川剧《思凡》选段    沈铁梅"},
 {"genre": "粤剧", "play": "昭君出塞", "aria": "昭君出塞", "artist": "红线女", "school": "红派", "bvid": "BV1QY411T7Tt", "p": 1, "t": 0, "dur": 598, "note": "", "src": "水月纸灯｜[4k]红线女-昭君出塞"},
-{"genre": "粤剧", "play": "荔枝颂", "aria": "荔枝颂", "artist": "红线女", "school": "红派", "bvid": "BV1xs41147F2", "p": 1, "t": 0, "dur": 273, "note": "粤曲", "src": "寒夜琴挑｜广东《荔枝颂》红线女"}
+{"genre": "粤剧", "play": "荔枝颂", "aria": "荔枝颂", "artist": "红线女", "school": "红派", "bvid": "BV1xs41147F2", "p": 1, "t": 0, "dur": 273, "note": "粤曲", "src": "寒夜琴挑｜广东《荔枝颂》红线女"},
+{"genre": "昆曲", "play": "千忠戮·惨睹", "aria": "收拾起大地山河一担装", "artist": "蔡正仁", "school": "", "bvid": "BV1YV4y127CX", "p": 32, "t": 0, "dur": 371, "note": "倾杯玉芙蓉", "src": "终身学习的好少年｜【昆曲】“雅部正音·冠生魁首”蔡正仁昆曲唱段合集 · 《千忠戮·惨睹》【倾杯玉芙蓉】"},
+{"genre": "昆曲", "play": "牡丹亭·寻梦", "aria": "最撩人春色是今年", "artist": "张继青", "school": "", "bvid": "BV1CU4y1z7pQ", "p": 1, "t": 0, "dur": 180, "note": "懒画眉", "src": "橘生过年则为砂糖橘｜牡丹亭-【寻梦】懒画眉——张继青"},
+{"genre": "昆曲", "play": "宝剑记·夜奔", "aria": "实指望封侯也那万里班超", "artist": "侯永奎", "school": "", "bvid": "BV12x4y127SJ", "p": 1, "t": 0, "dur": 364, "note": "折桂令·1935唱片·音配像", "src": "招军旗空中飘绕｜侯永奎先生《宝剑记·夜奔》【折桂令至煞尾】［自制音配像］"},
+{"genre": "昆曲", "play": "玉簪记·秋江", "aria": "秋江一望泪潸潸", "artist": "华文漪、岳美缇", "school": "", "bvid": "BV1tM41157MJ", "p": 19, "t": 0, "dur": 402, "note": "小桃红", "src": "顏子樂｜昆曲精粹——26个精彩唱段 · [昆曲精粹][玉簪记.秋江.小桃红][华文漪.岳美缇]"},
+{"genre": "昆曲", "play": "孽海记", "aria": "下山", "artist": "刘异龙", "school": "", "bvid": "BV1tM41157MJ", "p": 13, "t": 0, "dur": 148, "note": "", "src": "顏子樂｜昆曲精粹——26个精彩唱段 · [昆曲精粹][孽海记.下山][刘异龙]"},
+{"genre": "昆曲", "play": "牡丹亭·叫画", "aria": "些儿个，画图中影儿则度", "artist": "俞振飞", "school": "", "bvid": "BV1fs411T7NR", "p": 6, "t": 0, "dur": 422, "note": "二郎神、集贤宾·1929年开明唱片", "src": "sietkeu｜俞振飞昆曲唱片选 · 俞振飞《牡丹亭 叫画》【二郎神】【集贤宾】1929年开明公司唱片"},
+{"genre": "昆曲", "play": "白蛇传·断桥", "aria": "曾同鸾凤衾，指望交鸳颈", "artist": "胡锦芳", "school": "", "bvid": "BV1dE411w7Ee", "p": 1, "t": 0, "dur": 435, "note": "金络索·2019清唱", "src": "昆山当代昆剧院｜【昆曲清唱】胡锦芳《白蛇传•断桥》【金络索】"},
+{"genre": "昆曲", "play": "桃花扇·题画", "aria": "寻遍，立东风渐午天", "artist": "石小梅", "school": "", "bvid": "BV1rx41177Ar", "p": 1, "t": 0, "dur": 288, "note": "倾杯序·2017实况", "src": "石小梅昆曲工作室｜《桃花扇·题画》【倾杯序】_石小梅_2017"},
+{"genre": "昆曲", "play": "玉簪记", "aria": "琴挑", "artist": "汪世瑜、王奉梅", "school": "", "bvid": "BV13g4y1M7YT", "p": 1, "t": 0, "dur": 470, "note": "80年代视频", "src": "婺聲樓｜昆曲80年代视频 | 《琴挑》唱段 汪世瑜 王奉梅 演唱"},
+{"genre": "昆曲", "play": "长生殿·酒楼", "aria": "论男儿壮怀须自吐", "artist": "计镇华", "school": "", "bvid": "BV1tM41157MJ", "p": 24, "t": 0, "dur": 225, "note": "集贤宾", "src": "顏子樂｜昆曲精粹——26个精彩唱段 · [昆曲精粹][长生殿.酒楼.集贤宾][计镇华]"},
+{"genre": "昆曲", "play": "长生殿", "aria": "花繁秾艳想容颜", "artist": "王芳", "school": "", "bvid": "BV1fu411d74k", "p": 1, "t": 0, "dur": 193, "note": "泣颜回", "src": "大帅谈古今｜昆曲《长生殿》选段，王芳饰杨贵妃，赵文林饰唐明皇，泣颜回：花繁秾艳想容颜"},
+{"genre": "昆曲", "play": "琵琶记", "aria": "书馆", "artist": "周传瑛", "school": "", "bvid": "BV1hAXFYxE5A", "p": 4, "t": 0, "dur": 179, "note": "", "src": "收拾起大地山河｜独具匠心见艺心——周传瑛专辑 · 《琵琶记.书馆》周传瑛"},
+{"genre": "昆曲", "play": "铁冠图", "aria": "刺虎", "artist": "张静娴、吴双", "school": "", "bvid": "BV1tM41157MJ", "p": 3, "t": 0, "dur": 310, "note": "滚绣球", "src": "顏子樂｜昆曲精粹——26个精彩唱段 · [昆曲精粹][刺虎.滚秀球][张静娴.吴双]"},
+{"genre": "昆曲", "play": "邯郸梦", "aria": "三醉", "artist": "岳美缇", "school": "", "bvid": "BV1tM41157MJ", "p": 5, "t": 0, "dur": 225, "note": "", "src": "顏子樂｜昆曲精粹——26个精彩唱段 · [昆曲精粹][邯郸梦.三醉][岳美缇]"},
+{"genre": "昆曲", "play": "南柯记", "aria": "瑶台", "artist": "朱传茗", "school": "", "bvid": "BV14W411Q7BY", "p": 35, "t": 0, "dur": 188, "note": "1929年蓓开唱片", "src": "sietkeu｜昆曲老唱片选 · 朱传茗《南柯记 瑶台》1929年蓓开唱片"},
+{"genre": "越剧", "play": "红楼梦", "aria": "黛玉焚稿", "artist": "王文娟", "school": "王派", "bvid": "BV1ZK411w7BV", "p": 1, "t": 0, "dur": 426, "note": "1982年清唱", "src": "千里共婵娟越剧王文娟｜【越剧王文娟|珍影】今天也是为林妹妹落泪的一天-清唱\"焚稿\"1982年（王派宗师：红楼梦 追鱼 孟丽君 春香传 慧梅 沉香扇书房会  玉蜻蜓庵堂认母等）"},
+{"genre": "越剧", "play": "梁山伯与祝英台", "aria": "山伯临终", "artist": "范瑞娟", "school": "范派", "bvid": "BV1qX4y1Y7FZ", "p": 1, "t": 0, "dur": 651, "note": "1984年实况", "src": "rereyu310｜【越剧】梁祝-山伯临终（范瑞娟1984年实况）"},
+{"genre": "越剧", "play": "盘夫索夫", "aria": "官人好比天上月", "artist": "金采风、陆锦花", "school": "金派、陆派", "bvid": "BV1Cp421m744", "p": 1, "t": 0, "dur": 234, "note": "", "src": "没什么大事发生｜盘夫索夫 官人好比天上月..我只道奸臣只生奸臣女（金采风 陆锦花）"},
+{"genre": "越剧", "play": "北地王", "aria": "哭祖庙", "artist": "徐玉兰", "school": "徐派", "bvid": "BV1EW411n7ag", "p": 1, "t": 0, "dur": 597, "note": "1983年", "src": "再向人间陌路逢｜【越剧】《北地王·哭祖庙》徐玉兰（1983年）"},
+{"genre": "越剧", "play": "西厢记", "aria": "望晴空冰轮乍涌", "artist": "袁雪芬", "school": "袁派", "bvid": "BV1M14y1p7Ay", "p": 33, "t": 0, "dur": 494, "note": "1961年", "src": "Jluke｜袁雪芬越剧唱腔精选（42P全） · 33 望晴空冰轮乍涌（1961）"},
+{"genre": "越剧", "play": "西厢记", "aria": "拷红", "artist": "吕瑞英、张桂凤", "school": "吕派、张派", "bvid": "BV1Xv42167v1", "p": 1, "t": 0, "dur": 281, "note": "", "src": "羊羊老师不是羊｜【宗师影像】越剧 西厢记·拷红 吕瑞英 张桂凤"},
+{"genre": "越剧", "play": "浪荡子", "aria": "叹钟点", "artist": "尹桂芳", "school": "尹派", "bvid": "BV1jW4y1D7Se", "p": 1, "t": 0, "dur": 715, "note": "1948年唱片·音配像", "src": "yeahsirytl｜尹桂芳宗师1948年唱片《浪荡子•叹钟点》：尹小芳大师和王君安老师配像。"},
+{"genre": "越剧", "play": "玉堂春", "aria": "那一日梳妆来照镜", "artist": "戚雅仙", "school": "戚派", "bvid": "BV18d4y1t7nj", "p": 9, "t": 0, "dur": 510, "note": "1980年", "src": "Jluke｜戚雅仙越剧唱腔精选（45P全） · 09 那一日梳妆来照镜（1980）"},
+{"genre": "越剧", "play": "李娃传", "aria": "巧遇", "artist": "傅全香", "school": "傅派", "bvid": "BV1gTuwzfEM5", "p": 1, "t": 0, "dur": 385, "note": "1983版", "src": "gary2016｜李娃传 巧遇  1983版 傅全香 这一段是傅派代表作，唱腔优美委婉，体现傅派华丽、多变特点"},
+{"genre": "越剧", "play": "柳毅传书", "aria": "说媒拒亲", "artist": "竺水招", "school": "竺派", "bvid": "BV1wF411171C", "p": 5, "t": 0, "dur": 566, "note": "1963年实况", "src": "青纱罩灯｜【竺水招】《柳毅传书》合集||人间天上相会少 · 【1963实况】《说媒拒亲》"},
+{"genre": "越剧", "play": "何文秀", "aria": "桑园访妻", "artist": "王君安", "school": "尹派", "bvid": "BV1JB4y1V7ro", "p": 19, "t": 0, "dur": 248, "note": "", "src": "小布丁Iris｜【越剧】一些百听不厌的折子戏片段（袁雪芬徐玉兰王文娟 毕春芳陆锦花范瑞娟曹银娣吴凤花吴素英钱惠丽单仰萍方亚芬王君安赵志刚……） · 《何文秀·桑园访妻》王君安"},
+{"genre": "越剧", "play": "三笑", "aria": "点秋香", "artist": "毕春芳", "school": "毕派", "bvid": "BV1JB4y1V7ro", "p": 4, "t": 0, "dur": 442, "note": "", "src": "小布丁Iris｜【越剧】一些百听不厌的折子戏片段（袁雪芬徐玉兰王文娟 毕春芳陆锦花范瑞娟曹银娣吴凤花吴素英钱惠丽单仰萍方亚芬王君安赵志刚……） · 《三笑·点秋香》 毕春芳"},
+{"genre": "越剧", "play": "孟丽君", "aria": "描容", "artist": "张云霞", "school": "张派", "bvid": "BV1ot411o7GG", "p": 1, "t": 0, "dur": 349, "note": "1998年", "src": "可爱漂亮的人｜越剧-张云霞：孟丽君-描容（1998年）_标清"},
+{"genre": "越剧", "play": "马寡妇开店", "aria": "马寡妇开店", "artist": "筱丹桂、张湘卿", "school": "", "bvid": "BV1Qt411D7qX", "p": 1, "t": 0, "dur": 307, "note": "音配像·陈湜、王柔桑", "src": "陆冠英｜【越剧】《马寡妇开店》音配像 音：筱丹桂 张湘卿 像：陈湜 王柔桑"},
+{"genre": "黄梅戏", "play": "天仙配", "aria": "路遇", "artist": "严凤英、王少舫", "school": "严派", "bvid": "BV1F14y1p7bj", "p": 1, "t": 0, "dur": 663, "note": "戏曲电影", "src": "听读吧｜戏曲电影片段《天仙配》3-路遇（演唱 严凤英 王少舫）"},
+{"genre": "黄梅戏", "play": "牛郎织女", "aria": "到底人间欢乐多", "artist": "严凤英", "school": "严派", "bvid": "BV1RK4y177tZ", "p": 1, "t": 0, "dur": 262, "note": "", "src": "红楼梦石｜黄梅戏《牛郎织女》经典选段【到底人间欢乐多】（严风英）"},
+{"genre": "黄梅戏", "play": "天仙配", "aria": "槐荫开口把话提", "artist": "潘启才、韩再芬、丁紫臣", "school": "", "bvid": "BV1f64y1F7uV", "p": 1, "t": 0, "dur": 195, "note": "配唱", "src": "碧棠哥哥｜黄梅戏《天仙配》 选段   ‘槐荫开口把话提’   主演： 潘辉、韩再芬、丁紫臣   （配唱：潘启才、韩再芬、丁紫臣）"},
+{"genre": "黄梅戏", "play": "女驸马·洞房", "aria": "我本闺中一钗裙", "artist": "吴琼", "school": "", "bvid": "BV1Yu411p7xu", "p": 1, "t": 0, "dur": 334, "note": "名家名段演唱会", "src": "历经风霜万苦辛｜【黄梅戏】吴琼《女驸马·洞房》“我本闺中一钗裙”凤鸣声声 梅花朵朵 黄梅戏名家名段演唱会"},
+{"genre": "黄梅戏", "play": "红楼梦·宝玉哭灵", "aria": "如此红尘", "artist": "马兰", "school": "", "bvid": "BV1pV4y1D7a4", "p": 1, "t": 0, "dur": 461, "note": "", "src": "琴心清音｜马兰黄梅戏《红楼梦》选段宝玉哭灵：如此红尘"},
+{"genre": "黄梅戏", "play": "孟丽君", "aria": "金殿诉冤", "artist": "吴琼", "school": "", "bvid": "BV1tb41147bY", "p": 2, "t": 0, "dur": 480, "note": "", "src": "小蕾M南昌｜【黄梅戏】《孟丽君-金殿诉冤》韩再芬 吴琼 孙娟 余淑华 范卫红[五个版本] · 《孟丽君-金殿诉冤》吴琼"},
+{"genre": "黄梅戏", "play": "天女散花", "aria": "天女散花", "artist": "袁玫", "school": "", "bvid": "BV1B5411Y77h", "p": 1, "t": 0, "dur": 159, "note": "", "src": "恐龙王-｜【黄梅戏】天女散花：袁玫"},
+{"genre": "黄梅戏", "play": "孟姜女", "aria": "十二月调", "artist": "李文", "school": "", "bvid": "BV1PJ411y7TK", "p": 1, "t": 0, "dur": 529, "note": "", "src": "雪碧猛男｜黄梅戏《孟姜女》十二月调_原唱_李文__标清"},
+{"genre": "黄梅戏", "play": "牛郎织女", "aria": "架上累累悬瓜果", "artist": "吴亚玲", "school": "", "bvid": "BV1xy4y1S7fN", "p": 1, "t": 0, "dur": 244, "note": "", "src": "进光吧｜黄梅戏《牛郎织女》选段，吴亚玲精彩唱段，架上累累悬瓜果"},
+{"genre": "黄梅戏", "play": "山伯访友", "aria": "英台描药", "artist": "潘璟琍", "school": "", "bvid": "BV1dC4y1H7L1", "p": 1, "t": 0, "dur": 405, "note": "录音资料", "src": "牡丹生｜黄梅戏《山伯访友》英台描药选段   潘璟琍大师录音资料"},
+{"genre": "黄梅戏", "play": "罗帕记", "aria": "春情无限心花放", "artist": "杨俊、张辉", "school": "", "bvid": "BV1K94y1g7R4", "p": 1, "t": 0, "dur": 325, "note": "", "src": "沙漠の之王｜黄梅戏五朵金花之——杨俊《罗帕记》精彩唱段"},
+{"genre": "黄梅戏", "play": "风尘女画家", "aria": "海滩别", "artist": "赵媛媛、张辉", "school": "", "bvid": "BV1z34y1a79D", "p": 1, "t": 0, "dur": 261, "note": "", "src": "-至清之水-｜〖标清无码〗黄梅戏《风尘女画家·海滩别》赵媛媛 张辉演唱"},
+{"genre": "黄梅戏", "play": "龙女", "aria": "晚风习习秋月冷", "artist": "黄新德", "school": "", "bvid": "BV1Jb41137bV", "p": 1, "t": 0, "dur": 190, "note": "", "src": "戲夢Impetus｜黄新德 演唱 《龙女》选段——晚风习习秋月冷"},
+{"genre": "黄梅戏", "play": "玉堂春", "aria": "庙堂相会", "artist": "李文、韩军", "school": "", "bvid": "BV1R54y1S7YN", "p": 1, "t": 0, "dur": 246, "note": "配唱", "src": "碧棠哥哥｜黄梅戏《玉堂春》选段 ‘庙堂相会’ 主演： 林南、侯长荣 （配唱： 李文、韩军）"},
+{"genre": "黄梅戏", "play": "补背褡", "aria": "补背褡", "artist": "周珊、何云", "school": "", "bvid": "BV1544y1u7BT", "p": 1, "t": 0, "dur": 323, "note": "", "src": "无敌天才快乐小狗｜何云这也太甜太可爱了！周珊-何云-黄梅戏-补背褡选段"},
+{"genre": "黄梅戏", "play": "梁山伯与祝英台", "aria": "山伯临终", "artist": "丁紫臣", "school": "", "bvid": "BV1744y1z717", "p": 1, "t": 0, "dur": 141, "note": "", "src": "花郎儿｜丁紫臣黄梅戏《山伯临终》"},
+{"genre": "京剧", "play": "借东风", "aria": "习天书学兵法犹如反掌", "artist": "马连良", "school": "马派", "bvid": "BV1rk4y1y7fG", "p": 1, "t": 0, "dur": 465, "note": "1957年电影", "src": "大帅谈古今｜马连良京剧《借东风》选段，习天书学兵法犹如反掌，1957年电影高清版"},
+{"genre": "京剧", "play": "红灯记", "aria": "临行喝妈一碗酒", "artist": "钱浩梁", "school": "", "bvid": "BV1UBcoeTEYW", "p": 1, "t": 0, "dur": 108, "note": "1965年初版广播唱片", "src": "提龙笔写牒文大唐国号｜京剧《红灯记》“临行喝妈一碗酒”1965年初版广播唱片    钱浩梁（浩亮）饰李玉和"},
+{"genre": "京剧", "play": "搜孤救孤", "aria": "娘子不必太烈性", "artist": "余叔岩", "school": "余派", "bvid": "BV119RFBmEC5", "p": 1, "t": 0, "dur": 161, "note": "高亭录音", "src": "李天龙_RUC｜余叔岩：京剧《搜孤救孤》娘子不必太烈性/白虎大堂奉了命 · 娘子不必太烈性"},
+{"genre": "京剧", "play": "杜鹃山", "aria": "家住安源", "artist": "杨春霞", "school": "", "bvid": "BV1a4411b7zc", "p": 1, "t": 0, "dur": 262, "note": "1974年原声", "src": "火星黍黍｜1974革命现代京剧《杜鹃山》原声选段《家住安源》演唱：杨春霞"},
+{"genre": "京剧", "play": "逍遥津", "aria": "父子们在宫院伤心落泪", "artist": "李和曾", "school": "高派", "bvid": "BV1Vx41117nC", "p": 1, "t": 0, "dur": 528, "note": "", "src": "钟粟｜京剧《 逍遥津 》李和曾 父子们在宫院伤心落泪"},
+{"genre": "京剧", "play": "卖马", "aria": "店主东带过了黄骠马", "artist": "谭鑫培", "school": "谭派", "bvid": "BV11teB6TEJr", "p": 2, "t": 0, "dur": 251, "note": "1907年百代唱片", "src": "二黄没板｜叫天韵扬·老谭遗音撷珍 谭鑫培及其后唱片辑录 · 1907年 百代2面 谭鑫培《卖马》"},
+{"genre": "京剧", "play": "双阳公主", "aria": "远望长亭旌旗整", "artist": "尚小云", "school": "尚派", "bvid": "BV1vFErzuEhZ", "p": 1, "t": 0, "dur": 367, "note": "", "src": "渔樵戏韵｜尚小云先生京剧《双阳公主》经典唱段 远望长亭旌旗整"},
+{"genre": "京剧", "play": "白帝城", "aria": "恨不得把吴狗倾国灭尽", "artist": "奚啸伯", "school": "奚派", "bvid": "BV1zz4y1e7dq", "p": 1, "t": 0, "dur": 397, "note": "古董唱片", "src": "秋思听戏｜【古董唱片】奚啸伯《白帝城》恨不得"},
+{"genre": "京剧", "play": "捉放曹", "aria": "一轮明月照窗下", "artist": "言菊朋", "school": "言派", "bvid": "BV1AD56zrEmo", "p": 1, "t": 0, "dur": 452, "note": "1935年胜利唱片", "src": "渔樵戏韵｜言菊朋先生1935年胜利唱片 京剧《捉放曹》章梓宸京胡 谭长海司鼓"},
+{"genre": "京剧", "play": "白蛇传", "aria": "那一日炉中焚宝香", "artist": "叶盛兰", "school": "叶派", "bvid": "BV1z14y1V7jp", "p": 1, "t": 0, "dur": 222, "note": "音配像·叶少兰配像", "src": "慢腾腾mtt｜叶盛兰《白蛇传》唱段 四平调 那一日炉中焚宝香 (叶少兰配像)"},
+{"genre": "豫剧", "play": "拷红", "aria": "那一日你言道张生有恙", "artist": "常香玉、小香玉", "school": "常派", "bvid": "BV1H24y1b7UF", "p": 1, "t": 0, "dur": 389, "note": "", "src": "唱念做打梨园曲｜豫剧泰斗常香玉携手孙女小香玉《拷红》那一日你言道张生有恙 老夫人拷问红娘"},
+{"genre": "豫剧", "play": "花打朝", "aria": "小郎门外连声请", "artist": "马金凤", "school": "马派", "bvid": "BV18b411u7W1", "p": 2, "t": 0, "dur": 345, "note": "", "src": "A爱听戏曲网｜豫剧名家名段合集一 · 豫剧-花打朝-小郎门外连声请-马金凤"},
+{"genre": "豫剧", "play": "南阳关", "aria": "西门外放罢了催阵炮", "artist": "唐喜成", "school": "唐派", "bvid": "BV1Tg41127M2", "p": 1, "t": 0, "dur": 353, "note": "", "src": "公子多情Richard｜豫剧《南阳关·西门外放罢了催阵炮》，唐喜成"},
+{"genre": "豫剧", "play": "春秋配·捡柴", "aria": "羞答答出门来将头低下", "artist": "陈素真", "school": "陈派", "bvid": "BV1dQ4y1A733", "p": 2, "t": 0, "dur": 268, "note": "1956年中国唱片社", "src": "寻堃问倝｜豫剧 陈素真 不同时期《春秋配》捡柴唱段 不一样的听觉享受 · 《春秋配》1956年中国唱片社 羞答答出门来将头低下"},
+{"genre": "豫剧", "play": "秦香莲", "aria": "三江水洗不尽我满腹冤枉", "artist": "崔兰田", "school": "崔派", "bvid": "BV1984y1j7C2", "p": 1, "t": 0, "dur": 539, "note": "", "src": "大老张爱戏曲｜豫剧《秦香莲》“三江水洗不尽我满腹冤枉”，演唱崔兰田！"},
+{"genre": "豫剧", "play": "盘夫索夫", "aria": "自幼儿生长在宰相家", "artist": "阎立品", "school": "阎派", "bvid": "BV1aU4y1Q7od", "p": 1, "t": 0, "dur": 295, "note": "", "src": "河南移动戏曲频道｜【经典唱段】豫剧大师阎立品《盘夫索夫》，自幼儿生长在宰相家"},
+{"genre": "豫剧", "play": "三哭殿", "aria": "是何人殿脚下大放悲声", "artist": "刘忠河", "school": "刘派", "bvid": "BV18b411u7W1", "p": 9, "t": 0, "dur": 284, "note": "", "src": "A爱听戏曲网｜豫剧名家名段合集一 · 豫剧-三哭殿-是何人殿脚下大放悲声-刘忠河-"},
+{"genre": "豫剧", "play": "抬花轿", "aria": "花轿起三声炮惊天动地", "artist": "王清芬", "school": "", "bvid": "BV1Jt411t7YP", "p": 1, "t": 0, "dur": 287, "note": "", "src": "账号已注销｜豫剧-王清芬《抬花轿》花轿起三声炮惊天动地"},
+{"genre": "豫剧", "play": "包青天", "aria": "我不告天来不告地", "artist": "张宝英", "school": "崔派", "bvid": "BV1zw411V7SL", "p": 1, "t": 0, "dur": 182, "note": "", "src": "中州听曲儿｜【豫剧】《包青天》秦香莲唱段——我不告天来不告地。张宝英饰秦香莲"},
+{"genre": "豫剧", "play": "朝阳沟", "aria": "银环下山", "artist": "魏云", "school": "", "bvid": "BV1Kv4y1v7CM", "p": 1, "t": 0, "dur": 532, "note": "", "src": "大老张爱戏曲｜百听不厌传唱不衰的经典，豫剧《朝阳沟》“银环下山”，演唱魏云！"},
+{"genre": "豫剧", "play": "大祭桩", "aria": "离绣房移莲步花园走进", "artist": "虎美玲", "school": "", "bvid": "BV1MA411J7hn", "p": 1, "t": 0, "dur": 219, "note": "", "src": "戏迷有约｜虎美玲豫剧《大祭桩》离绣房移莲步花园走进，真好听"},
+{"genre": "曲剧", "play": "李豁子离婚", "aria": "清早起来去拾粪", "artist": "李天方", "school": "", "bvid": "BV1eK411X7m7", "p": 1, "t": 0, "dur": 145, "note": "", "src": "离殇i9812｜曲剧《李豁子离婚》清早起来去拾粪—李天方"},
+{"genre": "曲剧", "play": "背靴访帅", "aria": "杨元帅死不死还不一定", "artist": "马骐", "school": "马派", "bvid": "BV16W411R7cG", "p": 1, "t": 0, "dur": 369, "note": "", "src": "账号已注销｜曲剧-马骐《背靴访帅》杨元帅死不死还不一定"},
+{"genre": "越调", "play": "舌战群儒", "aria": "众位明公坐堂府", "artist": "申凤梅", "school": "申派", "bvid": "BV18b411u7JL", "p": 4, "t": 0, "dur": 242, "note": "", "src": "A爱听戏曲网｜越调申凤梅唱段合集 · 越调-舌战群儒-众位明公坐堂府-申凤梅"},
+{"genre": "越调", "play": "火焚绣楼", "aria": "恨光阴伴随琴音匆匆逝去", "artist": "毛爱莲", "school": "毛派", "bvid": "BV18b411u7t7", "p": 3, "t": 0, "dur": 235, "note": "", "src": "A爱听戏曲网｜越调毛爱莲唱段合集 · 越调-火焚绣楼-恨光阴伴随琴音匆匆逝去-毛爱莲"},
+{"genre": "评剧", "play": "花为媒", "aria": "洞房赞", "artist": "新凤霞", "school": "新派", "bvid": "BV1b266YNEFw", "p": 1, "t": 0, "dur": 500, "note": "1963年戏曲电影", "src": "霞光质检员｜《花为媒》7洞房赞-高清版-1963年长春电影制片厂"},
+{"genre": "评剧", "play": "刘巧儿", "aria": "巧儿我采桑叶来养蚕", "artist": "新凤霞", "school": "新派", "bvid": "BV1DuJR6WERF", "p": 1, "t": 0, "dur": 267, "note": "1956年戏曲电影", "src": "铭涛1｜评剧电影 刘巧儿•见专员1（巧儿我采桑叶来养蚕）-新凤霞（1956）"},
+{"genre": "评剧", "play": "金沙江畔", "aria": "小酸枣滴溜溜的圆", "artist": "小白玉霜", "school": "白派", "bvid": "BV1W1uA6rEXv", "p": 1, "t": 0, "dur": 228, "note": "1959录音·王冠丽配像", "src": "铭涛1｜评剧 金沙江畔•小酸枣滴溜溜的圆-筱白玉霜（1959录音，配像王冠丽）"},
+{"genre": "评剧", "play": "杜十娘", "aria": "我闻听此言大吃一惊", "artist": "鲜灵霞", "school": "鲜派", "bvid": "BV1AmCpYpEMX", "p": 1, "t": 0, "dur": 361, "note": "中唱版", "src": "浮生若梦续｜【鲜灵霞】我闻听此言大吃一惊 杜十娘唱段 中唱版"},
+{"genre": "评剧", "play": "茶瓶计", "aria": "今天府门外悬灯结彩", "artist": "花淑兰", "school": "花派", "bvid": "BV1qCTTzQEfC", "p": 1, "t": 0, "dur": 221, "note": "", "src": "浮生若梦续｜【花淑兰】茶瓶记 今天府门外悬灯结彩 版本1"},
+{"genre": "评剧", "play": "杨三姐告状", "aria": "哭灵", "artist": "赵丽蓉", "school": "", "bvid": "BV1EE4m1R7pK", "p": 1, "t": 0, "dur": 256, "note": "", "src": "留声藏曲｜纪念赵丽蓉逝世二十四周年评剧 杨三姐告状 哭灵"},
+{"genre": "评剧", "play": "秦香莲", "aria": "见皇姑", "artist": "刘萍、谷文月", "school": "白派、新派", "bvid": "BV1aw411r72H", "p": 1, "t": 0, "dur": 346, "note": "1989年录像", "src": "白糖就叫不咸的盐｜【录像带采集】评剧《秦香莲 见皇姑》（刘萍 谷文月演唱 1989年资料）"},
+{"genre": "评剧", "play": "乾坤带", "aria": "恕妾妃直言把君谏", "artist": "筱俊亭", "school": "筱派", "bvid": "BV1cs4y19772", "p": 2, "t": 0, "dur": 215, "note": "1987年", "src": "我是蛋美女｜筱俊亭评剧唱段五段-《典藏》 · 《乾坤带》1987年“怒妾妃直言把君谏”唱段"},
+{"genre": "评剧", "play": "野火春风斗古城", "aria": "骂宴", "artist": "马泰", "school": "马派", "bvid": "BV1EVC9BxERx", "p": 1, "t": 0, "dur": 231, "note": "录像带采集", "src": "王铁钏｜马泰-评剧《野火春风斗古城》骂宴 录像带采集"},
+{"genre": "评剧", "play": "花为媒", "aria": "李月娥独坐闺房不住地盼", "artist": "李忆兰", "school": "", "bvid": "BV1X1nB6UECb", "p": 1, "t": 0, "dur": 206, "note": "1963年戏曲电影", "src": "铭涛1｜评剧电影 花为媒•李月娥独坐闺房不住地盼-李忆兰、花砚茹、赵连喜（1963）"},
+{"genre": "评剧", "play": "祥林嫂", "aria": "嫁一个老实人", "artist": "谷文月", "school": "新派", "bvid": "BV1Th4y1k7NP", "p": 1, "t": 0, "dur": 218, "note": "", "src": "戏曲的大集合｜评剧《祥林嫂》选段“嫁一个老实人”谷文月演唱"},
+{"genre": "评剧", "play": "桃花庵", "aria": "我闻听夫人述其故", "artist": "喜彩莲", "school": "喜派", "bvid": "BV1zN411a7Un", "p": 1, "t": 0, "dur": 188, "note": "", "src": "心若止水453｜评剧《桃花庵》我闻听夫人述其故 喜彩莲饰陈妙善"},
+{"genre": "评剧", "play": "包公三勘蝴蝶梦", "aria": "一家人闻凶信哪魂飞魄散", "artist": "鲜灵霞", "school": "鲜派", "bvid": "BV1PD4y1L7C2", "p": 1, "t": 0, "dur": 213, "note": "", "src": "评剧爱好者｜评剧《包公三勘蝴蝶梦》一家人闻凶信哪魂飞魄散 天津评剧院 鲜灵霞"},
+{"genre": "评剧", "play": "黛诺", "aria": "人常说景颇山上云雾深", "artist": "花淑兰", "school": "花派", "bvid": "BV17CTTzXE3H", "p": 1, "t": 0, "dur": 293, "note": "", "src": "浮生若梦续｜【花淑兰】黛诺 人常说景颇山上云雾深 版本2"},
+{"genre": "评剧", "play": "无双传", "aria": "曲江池上独自赏春天", "artist": "张德福", "school": "", "bvid": "BV16z4y1a7mS", "p": 1, "t": 0, "dur": 244, "note": "1960年中国唱片", "src": "银锭观山景｜【老粗纹唱片】评剧 无双传 选段 曲江池上独自赏春天 中国评剧院一团 张德福 演唱 1960年中国唱片"},
+{"genre": "评剧", "play": "朱痕记", "aria": "望坟台", "artist": "魏荣元", "school": "魏派", "bvid": "BV16h4y1D7ra", "p": 1, "t": 0, "dur": 453, "note": "音借像", "src": "高山流水1980｜【朱痕记】望坟台-魏荣元（评剧）"},
+{"genre": "秦腔", "play": "铡美案", "aria": "杀庙", "artist": "李正敏", "school": "敏腔", "bvid": "BV1Ef4y1S7cJ", "p": 6, "t": 0, "dur": 316, "note": "", "src": "瓦尔登散人｜【秦腔】“秦腔正宗”李正敏先生 珍藏录音合辑（电台、百代、中唱录音） · 《铡美案-杀庙》选段"},
+{"genre": "秦腔", "play": "白蛇传·断桥", "aria": "西湖山水还依旧", "artist": "马友仙", "school": "", "bvid": "BV1KN4y1N7nL", "p": 1, "t": 0, "dur": 475, "note": "", "src": "沐雪聆音｜【高清修复】秦腔：西湖山水还依旧  马友仙演唱"},
+{"genre": "秦腔", "play": "游西湖·鬼怨", "aria": "怨气腾腾三千丈", "artist": "李梅", "school": "", "bvid": "BV1ot4y1j7jZ", "p": 1, "t": 0, "dur": 554, "note": "", "src": "秦声秦语｜李梅（17岁）秦腔《鬼怨》怨气腾腾三千丈"},
+{"genre": "河北梆子", "play": "大登殿", "aria": "金牌调来银牌宣", "artist": "刘玉玲", "school": "", "bvid": "BV1bb411Q7o2", "p": 1, "t": 0, "dur": 183, "note": "1960年中国唱片", "src": "银锭观山景｜【老粗纹唱片】河北梆子 大登殿 1960中国唱片唱段合集 刘玉玲 演唱 · 银牌调来金牌宣"},
+{"genre": "河北梆子", "play": "秦香莲", "aria": "手儿里拉定了我儿和女", "artist": "韩俊卿、胡满堂", "school": "", "bvid": "BV1Vq4y1H7rq", "p": 7, "t": 0, "dur": 625, "note": "中唱1985年磁带", "src": "无聊小僵尸｜【河北梆子唱腔荟萃】音频配字幕（完结） · 秦香莲-韩俊卿 胡满堂（手儿里拉定了我儿和女）"},
+{"genre": "河北梆子", "play": "蝴蝶杯", "aria": "忽听得谯楼上响起更点", "artist": "田春鸟", "school": "", "bvid": "BV1Vq4y1H7rq", "p": 22, "t": 0, "dur": 323, "note": "中唱1985年磁带", "src": "无聊小僵尸｜【河北梆子唱腔荟萃】音频配字幕（完结） · 蝴蝶杯-田春鸟（忽听得谯楼上响起更点）"},
+{"genre": "晋剧", "play": "法门寺", "aria": "郿坞县在马上心神不定", "artist": "丁果仙", "school": "丁派", "bvid": "BV1vx411p7j5", "p": 2, "t": 0, "dur": 426, "note": "音配像·李明星", "src": "万万想到没想到｜晋剧合辑【缓慢更新】 · 八件衣-郿邬县在马上心神不定-丁果仙（李明星配像）"},
+{"genre": "晋剧", "play": "算粮登殿", "aria": "金牌调银牌宣火速驰往", "artist": "程玉英", "school": "程派", "bvid": "BV1oa411c721", "p": 1, "t": 0, "dur": 605, "note": "1991年资料", "src": "晋青会韩大卫｜【晋剧典藏】程玉英《算粮登殿》"},
+{"genre": "晋剧", "play": "走雪山", "aria": "原来是老哥哥面前立", "artist": "牛桂英", "school": "牛派", "bvid": "BV1fh411j7d8", "p": 10, "t": 0, "dur": 513, "note": "", "src": "浑磊先森｜【晋剧】晋剧表演艺术家牛桂英经典唱段合辑 · 《走山》之“原来是老哥哥面前立”"},
+{"genre": "川剧", "play": "白蛇传·断桥", "aria": "重逢旧地血泪双落", "artist": "阳友鹤", "school": "阳派", "bvid": "BV1fz4y1c7mf", "p": 1, "t": 0, "dur": 416, "note": "", "src": "沽上青云楼主｜[全网首发]川剧高腔·阳友鹤《断桥会》录音全字幕"},
+{"genre": "川剧", "play": "拷红", "aria": "老夫人息怒暂且住手", "artist": "竞华", "school": "", "bvid": "BV1qrbU66EQF", "p": 4, "t": 0, "dur": 309, "note": "1980年", "src": "Supupy｜【自藏】中国戏曲艺术家唱腔选（三十）川剧·竞华 · 04《拷红》：老夫人息怒暂且住手(1980)"},
+{"genre": "川剧", "play": "柳荫记·骂媒", "aria": "埋怨爹妈做事差", "artist": "陈书舫", "school": "", "bvid": "BV1zT4y1m7D5", "p": 1, "t": 0, "dur": 181, "note": "中唱唱片", "src": "周浦大宝贝｜【川剧名家名段（高腔）】《柳荫记•骂媒》 “埋怨爹妈做事差”陈书舫"},
+{"genre": "粤剧", "play": "帝女花·香夭", "aria": "落花满天蔽月光", "artist": "任剑辉、白雪仙", "school": "任腔、仙腔", "bvid": "BV12D4y13784", "p": 1, "t": 0, "dur": 463, "note": "", "src": "小蕾M南昌｜【1080P】粤剧《帝女花_香夭》任剑辉×白雪仙[全]"},
+{"genre": "粤剧", "play": "柳毅传书", "aria": "花好月圆", "artist": "罗家宝、林锦屏", "school": "虾腔", "bvid": "BV11t41117fT", "p": 97, "t": 0, "dur": 708, "note": "", "src": "哔站粤剧院｜【粤剧粤曲】《经典名曲合集》（众粤剧粤曲大老倌）（缓缓更） · 《柳毅传书之花好月圆》（罗家宝 林锦屏）"},
+{"genre": "粤剧", "play": "心声泪影", "aria": "寒江钓雪", "artist": "薛觉先", "school": "薛腔", "bvid": "BV1Cb411V7hS", "p": 1, "t": 0, "dur": 767, "note": "", "src": "登州薛氏｜【薛觉先】《心声泪影》之「寒江钓雪」"}
 ]
 </script>
 
@@ -311,7 +451,7 @@ h2 { margin: .2rem 0 .8rem; font-size: 1.5rem; }
   var MORE_ORDER = ["曲剧", "越调", "秦腔", "河北梆子", "晋剧", "川剧", "粤剧"];
   var GENRE_COLORS = {
     "京剧": "#A3231A", "豫剧": "#A04A10", "越剧": "#1C6585", "黄梅戏": "#2E6E37",
-    "评剧": "#71398F", "昆曲": "#7A5410", "更多": "#4E3A2E", "收藏": "#8E1F45"
+    "评剧": "#71398F", "昆曲": "#7A5410", "更多": "#4E3A2E", "收藏": "#8E1F45", "本地": "#28506E"
   };
   var LOAD_DELAY = 2.5;      // iframe 加载到出声大约要这么久,计时从这之后开始
   var END_GRACE = 3;         // 估计唱完后再多等几秒才算结束
@@ -336,11 +476,38 @@ h2 { margin: .2rem 0 .8rem; font-size: 1.5rem; }
     try { localStorage.setItem("xiqu." + key, JSON.stringify(value)); } catch (err) { /* 存不了就算了 */ }
   }
 
-  var favs = load("fav", []).filter(function (id) { return byId[id]; });
+  // 收藏里可能有本地唱段的 id,本地清单是异步取回来的,所以这里不过滤,用的时候再过滤
+  var favs = load("fav", []);
   var prefs = load("prefs", { size: "", autoNext: true });
 
   var $ = function (id) { return document.getElementById(id); };
   var frame = $("frame");
+  var media = $("media");
+
+  // 桌面版(desktop.py 起的本机服务)才有 api/local;放到网上时这个请求 404,页面照旧
+  var DESKTOP = false, LOCAL = [], LOCAL_DIR = "";
+  function loadLocal() {
+    if (!window.fetch || location.protocol === "file:") return Promise.resolve(false);
+    return fetch("api/local", { cache: "no-store" }).then(function (r) {
+      if (!r.ok) return false;
+      return r.json().then(function (d) {
+        DESKTOP = true;
+        LOCAL_DIR = d.dir;
+        LOCAL.forEach(function (e) { delete byId[e.id]; });
+        LOCAL = d.items.map(function (it) {
+          return {
+            id: it.id, local: true, genre: "本地唱段", folder: it.genre, kind: it.kind, ext: it.ext,
+            playable: it.playable, play: it.play, aria: it.aria, artist: it.artist, school: "",
+            url: "media/" + it.rel.split("/").map(encodeURIComponent).join("/"),
+            p: 1, t: 0, dur: 0, note: "", src: "本地文件 · " + it.rel
+          };
+        });
+        LOCAL.forEach(function (e) { byId[e.id] = e; });
+        return true;
+      });
+    }).catch(function () { return false; });
+  }
+  function playable(e) { return e.playable !== false; }
 
   function el(tag, cls, text) {
     var n = document.createElement(tag);
@@ -348,8 +515,9 @@ h2 { margin: .2rem 0 .8rem; font-size: 1.5rem; }
     if (text !== undefined) n.textContent = text;
     return n;
   }
-  function minutes(sec) { return "约" + Math.max(1, Math.round(sec / 60)) + "分钟"; }
+  function minutes(sec) { return sec > 0 ? "约" + Math.max(1, Math.round(sec / 60)) + "分钟" : ""; }
   function segLen(e) { return Math.max(1, (e.dur || 0) - e.t); }
+  function favList() { return favs.map(function (id) { return byId[id]; }).filter(Boolean); }
   function genreOf(name) { return CATALOG.filter(function (e) { return e.genre === name; }); }
   function genres() {
     var seen = [];
@@ -363,8 +531,9 @@ h2 { margin: .2rem 0 .8rem; font-size: 1.5rem; }
     });
   }
   function metaLine(e) {
-    var play = e.play === e.aria ? "" : "《" + e.play + "》 ";   // 「夫妻观灯」不再重复《夫妻观灯》
-    return play + e.artist + (e.school ? "（" + e.school + "）" : "");
+    var play = !e.play || e.play === e.aria ? "" : "《" + e.play + "》 ";   // 「夫妻观灯」不再重复《夫妻观灯》
+    var line = (play + e.artist + (e.school ? "（" + e.school + "）" : "")).trim();
+    return line || (e.local ? e.folder : "");
   }
   function shuffle(a) {
     a = a.slice();
@@ -432,7 +601,8 @@ h2 { margin: .2rem 0 .8rem; font-size: 1.5rem; }
     } else {
       parkPlayer();
       if (page === "g" && genreOf(arg).length) showList(arg, genreOf(arg), "#/g/" + encodeURIComponent(arg));
-      else if (page === "fav") showList("收藏", favs.map(function (id) { return byId[id]; }), "#/fav");
+      else if (page === "fav") showList("收藏", favList(), "#/fav");
+      else if (page === "local" && DESKTOP) showList("本地唱段", LOCAL, "#/local");
       else if (page === "more") { $("barTitle").textContent = "更多剧种"; $("v-more").classList.add("active"); }
       else { $("barTitle").textContent = "听戏"; renderHome(); $("v-home").classList.add("active"); }
     }
@@ -461,7 +631,11 @@ h2 { margin: .2rem 0 .8rem; font-size: 1.5rem; }
     if (more.length) {
       grid.appendChild(tile("更多剧种", more.slice(0, 3).join("、") + "…", GENRE_COLORS["更多"], function () { go("#/more"); }));
     }
-    grid.appendChild(tile("我的收藏", favs.length ? favs.length + " 段" : "还没有", GENRE_COLORS["收藏"], function () { go("#/fav"); }));
+    if (DESKTOP) {
+      grid.appendChild(tile("本地唱段", LOCAL.length ? LOCAL.length + " 个文件" : "放音视频进来", GENRE_COLORS["本地"], function () { go("#/local"); }));
+    }
+    var nf = favList().length;
+    grid.appendChild(tile("我的收藏", nf ? nf + " 段" : "还没有", GENRE_COLORS["收藏"], function () { go("#/fav"); }));
 
     var mg = $("moreGrid");
     mg.innerHTML = "";
@@ -486,40 +660,56 @@ h2 { margin: .2rem 0 .8rem; font-size: 1.5rem; }
     }
   }
   $("randomBtn").addEventListener("click", function () {
-    var ids = shuffle(CATALOG).map(function (e) { return e.id; });
+    var ids = shuffle(CATALOG.concat(LOCAL.filter(playable))).map(function (e) { return e.id; });
     startQueue(ids, ids[0], 0, "#/");
   });
 
   // ---------- 唱段列表 ----------
+  function detailLine(e) {
+    if (!e.local) return [minutes(segLen(e)), e.note].filter(Boolean).join(" · ");
+    var kind = e.kind === "video" ? "本地视频" : "本地音频";
+    return [kind, e.folder === "未分类" ? "" : e.folder, minutes(e.dur)].filter(Boolean).join(" · ");
+  }
   function showList(title, entries, hash) {
+    var isLocal = hash === "#/local";
     $("barTitle").textContent = title;
-    $("listTitle").textContent = title === "收藏" ? "我收藏的唱段" : title + " · 名家名段";
+    $("listTitle").textContent = title === "收藏" ? "我收藏的唱段" : isLocal ? "本地唱段 · 你自己的音频视频" : title + " · 名家名段";
+    $("localTools").hidden = !isLocal;
+    $("localDir").textContent = LOCAL_DIR;
+    var ids = entries.filter(playable).map(function (x) { return x.id; });
     var ol = $("list");
     ol.innerHTML = "";
-    $("playAllBtn").hidden = !entries.length;
+    $("playAllBtn").hidden = !ids.length;
     if (!entries.length) {
       var li = el("li");
-      li.appendChild(el("div", "empty", "还没有收藏。听戏的时候点一下「收藏」，这段戏就会出现在这里。"));
+      li.appendChild(el("div", "empty", isLocal
+        ? "这个文件夹里还没有音频或视频。点「打开这个文件夹」，把 MP3、MP4 放进去（可以按剧种建子文件夹），再点「放好了，刷新列表」。"
+        : "还没有收藏。听戏的时候点一下「收藏」，这段戏就会出现在这里。"));
       ol.appendChild(li);
     }
     entries.forEach(function (e) {
       var li = el("li");
-      var b = el("button", "item" + (state.cur && state.cur.id === e.id ? " on" : ""));
+      var ok = playable(e);
+      var b = el("button", "item" + (ok ? "" : " off") + (state.cur && state.cur.id === e.id ? " on" : ""));
       b.type = "button";
       b.appendChild(el("span", "a", "「" + e.aria + "」"));
       b.appendChild(el("span", "m", metaLine(e)));
-      b.appendChild(el("span", "d", minutes(segLen(e)) + (e.note ? " · " + e.note : "")));
-      b.addEventListener("click", function () {
-        startQueue(entries.map(function (x) { return x.id; }), e.id, 0, hash);
-      });
+      b.appendChild(el("span", "d", detailLine(e)));
+      if (ok) {
+        b.addEventListener("click", function () { startQueue(ids, e.id, 0, hash); });
+      } else {
+        b.appendChild(el("span", "d warn", "这个格式（" + e.ext.toUpperCase() + "）放不了，要先转成 MP3 或 MP4"));
+      }
       li.appendChild(b);
       ol.appendChild(li);
     });
-    $("playAllBtn").onclick = function () {
-      startQueue(entries.map(function (x) { return x.id; }), entries[0].id, 0, hash);
-    };
+    $("playAllBtn").onclick = function () { startQueue(ids, ids[0], 0, hash); };
     $("v-list").classList.add("active");
   }
+  $("openDirBtn").addEventListener("click", function () {
+    fetch("api/open-folder", { method: "POST", headers: { "X-Xiqu": "1" } }).catch(function () {});
+  });
+  $("refreshBtn").addEventListener("click", function () { loadLocal().then(route); });
 
   // ---------- 播放 ----------
   // B 站嵌入播放器是跨域 iframe,外面拿不到它的播放进度和结束事件,
@@ -535,7 +725,11 @@ h2 { margin: .2rem 0 .8rem; font-size: 1.5rem; }
     return "https://player.bilibili.com/player.html?isOutside=true&bvid=" + e.bvid +
       "&p=" + e.p + "&t=" + Math.floor(e.t + offset) + "&autoplay=1&danmaku=0";
   }
+  // 本地文件用自带的 <video>,进度、暂停、播完都是真事件;B 站那套估算只用在 iframe 上
+  var pendingSeek = 0;
+  function playHash(id) { return "#/play/" + encodeURIComponent(id); }   // 本地 id 里有「/」
   function elapsed() {
+    if (state.cur && state.cur.local) return media.currentTime || 0;
     if (!state.playing) return state.pausedAt;
     return state.base + Math.max(0, (Date.now() - state.startedAt) / 1000);
   }
@@ -543,10 +737,19 @@ h2 { margin: .2rem 0 .8rem; font-size: 1.5rem; }
     state.queue = ids;
     state.listHash = listHash || "#/";
     loadEntry(byId[id], offset || 0);
-    go("#/play/" + id);
+    go(playHash(id));
+  }
+  function unloadMedia() {
+    if (media.getAttribute("src")) {
+      media.pause();
+      media.removeAttribute("src");
+      media.load();
+    }
+    media.hidden = true;
+    $("audioArt").hidden = true;
   }
   function loadEntry(e, offset) {
-    offset = Math.max(0, Math.min(offset, segLen(e) - 10));
+    offset = Math.max(0, e.local ? offset : Math.min(offset, segLen(e) - 10));
     state.cur = e;
     state.idx = Math.max(0, state.queue.indexOf(e.id));
     state.playing = true;
@@ -556,7 +759,20 @@ h2 { margin: .2rem 0 .8rem; font-size: 1.5rem; }
     state.startedAt = Date.now() + LOAD_DELAY * 1000;
     $("overlay").hidden = true;
     $("banner").hidden = true;
-    frame.src = embedUrl(e, offset);
+    if (e.local) {
+      frame.src = "about:blank";
+      frame.hidden = true;
+      $("audioArt").textContent = "「" + e.aria + "」";
+      $("audioArt").hidden = e.kind === "video";
+      media.hidden = false;
+      pendingSeek = offset;
+      media.src = e.url;
+      media.play().catch(function () { state.playing = false; paintPlayer(); });
+    } else {
+      unloadMedia();
+      frame.hidden = false;
+      frame.src = embedUrl(e, offset);
+    }
     keepAwake(true);
     remember();
     paintPlayer();
@@ -567,14 +783,25 @@ h2 { margin: .2rem 0 .8rem; font-size: 1.5rem; }
     state.playing = false;
     state.countdown = 0;
     $("banner").hidden = true;
-    frame.src = "about:blank";
     keepAwake(false);
     remember();
-    showOverlay("已经暂停了", "点下面的「继续听」，接着往下唱");
+    if (state.cur.local) {
+      media.pause();
+    } else {
+      frame.src = "about:blank";
+      showOverlay("已经暂停了", "点下面的「继续听」，接着往下唱");
+    }
     paintPlayer();
   }
   function resume() {
     if (!state.cur) return;
+    if (state.cur.local) {
+      if (state.ended) media.currentTime = 0;
+      $("overlay").hidden = true;
+      $("banner").hidden = true;
+      media.play().catch(function () {});   // playing 由 play 事件置上
+      return;
+    }
     loadEntry(state.cur, state.ended ? 0 : state.pausedAt - 3);
   }
   function step(delta) {
@@ -582,8 +809,49 @@ h2 { margin: .2rem 0 .8rem; font-size: 1.5rem; }
     var i = (state.idx + delta + state.queue.length) % state.queue.length;
     var e = byId[state.queue[i]];
     loadEntry(e, 0);
-    replaceHash("#/play/" + e.id);
+    replaceHash(playHash(e.id));
   }
+  function onEnded() {
+    state.ended = true;
+    if (prefs.autoNext && state.queue.length > 1) { state.countdown = COUNTDOWN; showCountdown(true); }
+    else showEnded();
+    paintPlayer();
+  }
+  function isLocalNow() { return !!(state.cur && state.cur.local); }
+  media.addEventListener("loadedmetadata", function () {
+    if (!isLocalNow()) return;
+    state.cur.dur = Math.round(media.duration) || 0;
+    if (pendingSeek > 0) media.currentTime = pendingSeek;
+    pendingSeek = 0;
+    paintPlayer();
+  });
+  media.addEventListener("play", function () {
+    if (!isLocalNow()) return;
+    state.playing = true;
+    state.ended = false;
+    $("overlay").hidden = true;
+    keepAwake(true);
+    paintPlayer();
+  });
+  media.addEventListener("pause", function () {   // 用画面上自带的小按钮暂停时也同步
+    if (!isLocalNow() || media.ended || !state.playing) return;
+    state.playing = false;
+    state.pausedAt = media.currentTime;
+    remember();
+    paintPlayer();
+  });
+  media.addEventListener("ended", function () {
+    if (!isLocalNow()) return;
+    state.playing = false;
+    remember();
+    onEnded();
+  });
+  media.addEventListener("error", function () {
+    if (!isLocalNow() || !media.getAttribute("src")) return;
+    state.playing = false;
+    showOverlay("这个文件放不了", "可能是格式不支持，点「下一段」换一个");
+    paintPlayer();
+  });
   function stopAll(message) {
     pause();
     $("mini").hidden = true;
@@ -605,8 +873,8 @@ h2 { margin: .2rem 0 .8rem; font-size: 1.5rem; }
     if (!state.cur || state.cur.id !== e.id) {
       // 直接打开分享来的播放地址时:队列用该剧种
       if (state.queue.indexOf(e.id) < 0) {
-        state.queue = genreOf(e.genre).map(function (x) { return x.id; });
-        state.listHash = "#/g/" + encodeURIComponent(e.genre);
+        state.queue = (e.local ? LOCAL.filter(playable) : genreOf(e.genre)).map(function (x) { return x.id; });
+        state.listHash = e.local ? "#/local" : "#/g/" + encodeURIComponent(e.genre);
       }
       loadEntry(e, 0);
     }
@@ -625,8 +893,9 @@ h2 { margin: .2rem 0 .8rem; font-size: 1.5rem; }
     var e = state.cur;
     if (!e) return;
     $("pAria").textContent = "「" + e.aria + "」";
-    $("pMeta").textContent = metaLine(e) + " · " + minutes(segLen(e));
-    $("pSrc").textContent = "来源：哔哩哔哩 · " + e.src;
+    $("pMeta").textContent = [metaLine(e), e.local ? minutes(e.dur) : minutes(segLen(e))].filter(Boolean).join(" · ");
+    $("pSrc").textContent = "来源：" + (e.local ? e.src : "哔哩哔哩 · " + e.src);
+    $("hint").hidden = !!e.local;
     var pb = $("playBtn");
     pb.innerHTML = state.playing
       ? '<svg><use href="#i-pause"/></svg>暂停一下'
@@ -671,7 +940,7 @@ h2 { margin: .2rem 0 .8rem; font-size: 1.5rem; }
     if (!prefs.autoNext && state.countdown) { state.countdown = 0; showEnded(); }
     paintPlayer();
   });
-  $("miniOpen").addEventListener("click", function () { if (state.cur) go("#/play/" + state.cur.id); });
+  $("miniOpen").addEventListener("click", function () { if (state.cur) go(playHash(state.cur.id)); });
   $("miniStop").addEventListener("click", function () { stopAll(); });
 
   function showEnded() {
@@ -712,20 +981,17 @@ h2 { margin: .2rem 0 .8rem; font-size: 1.5rem; }
       state.sleepStep = 0;
       stopAll("定时到了，已经停了");
     }
-    if (!state.cur || !state.playing) return;
-    ticks++;
-    if (ticks % 5 === 0) remember();
-    if (ticks % 30 === 0) paintPlayer();   // 刷新「还剩几分钟」
+    // 倒计时独立于播放状态:本地文件播完时已经是真暂停了
     if (state.countdown > 0) {
       state.countdown--;
       if (state.countdown === 0) step(1); else showCountdown();
       return;
     }
-    if (!state.ended && elapsed() >= segLen(state.cur) + END_GRACE) {
-      state.ended = true;
-      if (prefs.autoNext && state.queue.length > 1) { state.countdown = COUNTDOWN; showCountdown(true); }
-      else { showEnded(); }
-    }
+    if (!state.cur || !state.playing) return;
+    ticks++;
+    if (ticks % 5 === 0) remember();
+    if (ticks % 30 === 0) paintPlayer();   // 刷新「还剩几分钟」
+    if (!state.cur.local && !state.ended && elapsed() >= segLen(state.cur) + END_GRACE) onEnded();
   }, 1000);
 
   // 放戏时不让屏幕自动熄灭(手机锁屏后浏览器会把视频停掉)
@@ -747,6 +1013,15 @@ h2 { margin: .2rem 0 .8rem; font-size: 1.5rem; }
 
   applySize();
   route();
+  loadLocal().then(function (ok) {
+    if (!ok) return;
+    $("foot").textContent = "「本地唱段」放的是这台电脑上的音频视频，不用联网；其余名家名段在哔哩哔哩（B站）上在线播放，要联网。";
+    route();
+    // 心跳:desktop.py 靠它判断窗口还开着
+    var ping = function () { fetch("api/ping", { cache: "no-store" }).catch(function () {}); };
+    ping();
+    setInterval(ping, 5000);
+  });
 })();
 </script>
 </body>
