@@ -487,7 +487,8 @@ h2 { margin: .2rem 0 .8rem; font-size: 1.5rem; }
   // 桌面版(desktop.py 起的本机服务)才有 api/local;放到网上时这个请求 404,页面照旧
   var DESKTOP = false, LOCAL = [], LOCAL_DIR = "";
   function loadLocal() {
-    if (!window.fetch || location.protocol === "file:") return Promise.resolve(false);
+    // desktop.py 总是在 127.0.0.1 上开窗口;网上的页面不去探测,免得每次打开都白跑一个 404
+    if (!window.fetch || !/^(127\.0\.0\.1|localhost)$/.test(location.hostname)) return Promise.resolve(false);
     return fetch("api/local", { cache: "no-store" }).then(function (r) {
       if (!r.ok) return false;
       return r.json().then(function (d) {
