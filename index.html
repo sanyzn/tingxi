@@ -1,0 +1,753 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#9E1F16">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="听戏">
+<title>听戏 · 名家经典唱段</title>
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<link rel="icon" type="image/png" sizes="180x180" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAYAAAA9zQYyAAAWP0lEQVR42u2dd2BU1baHfzPpvZOEJJACaZSQQCD0HkBQmuVKUeSCcCkqcFXUd+9VnwWfAgoiIkoTRQWRHiEQahIIgQRCSC+QhPTeMyXvDy4YMufMnJmcqVnfn5kzZ2bOfLOyzt5rry2AFtnVu0c7CINj8b0ygbZeW0DyEoYkuYAkJgxJbgGJTBiS2AISmTAksQUkMmFIYgtJZkJX4MMlIclMGJLUAhKZMKQUREgyE4YUrQW6IPMrVzfSt2cA7I5Yp/VILdCGzCQwCa4uqQWalJlEJrHVLbVAEzKTyARfYiuS2lidH0AZkdWVfxGagct3/egYdX7XAnVFZ0UfkATu3oJ35fuXF6UFmpaZRCax1Sm1gE+ZSWRCk24wSc2b0GxvmEQm1OUJk9BCkpmADox0qDISxuSqUN9mjQgavgPXWg6+ojPJTKgiNR9RWsh3PkQyE5qWmlFoZaMzyUzoitQd3RVSzkwYUk4tpNoMAno6lc4qdFcLkCg6E9qO0o8cFlJ0JgwpSgspdyYMKZcWUnQmDClKCyk6E4YUpYW0ipuAAa0SF9JlIAwJIeXPhCHl0ULKnwlDyqMp5SC6Z8pBECQ0QZDQBEFC6zQCoRBCI7rUmsCYLoF66T9/HIasnA6BUIimijpUphegMC4d9y6moLmyni4QCa1fWLrYQSB8GJ0tnW1hOaofvEb1w7B1s1EUn4a0Q3EouppOF4pSDv0g/VAsJCKx7IU3EsJrVD9EfrkU07avgJWbA10sElr3qSusQMreGLnHuIX6Yfq3K2FmZ0UXjITWfVL2n0drbaPcY6zcHBD83Ci6WCS07iNuaUPmsQSFx9n7uNLFIqH1g5w/ExUeU19cRReKhNYPqnNKUFdYIfeYspR8ulCgYTu9oSg+HbZy8uTGkhqF57B0toVj356wdLGDqY0FjM1MIDASQtImRmtdExoeVKEsJR+iplYSmlAvDxKzECRHaHFLm9znO/p7YOa+tQpfp10qRfGNbKQeuITCuDRKOQj1UHaraylFVWYRck7fBJep9p7h/pi8aQkmb14KCycbEprgn5aaBrl5tNDYSOE5Ln/wM1IPXOL8mp7DA/HM3rWw692DhCb4pzKtgD3/szDlkE60I+Grozj/7l601Tdzek1LZ1tM/L9XOP1gSGhCKSrSC1kfM7U253ye/JjbOLLgC5Qm53I63q53D/Qa04+EJsDz8F0x62NmtpZKnauxtAZRK7YjaedptEulUDxx40ZCE/yPR7MKrUItR7tUiuQfzuDUsm1oUDAx01xVT0IT/NJUXsua+1o4Wqt83rKUfBxduBF50UmMj0tFEty/dIeEJtQQpXNLWITu2vBaW0MLLvxrPy598LNMMVTyD2e6xYICmljRUh7tGuIjK7SzHS/nz4m6gYLLqfCNDIO9jytKk/OQdy4ZNFNIqIUalght5WLL22u0NbQg/XAcqDiJ0NqNoWUPe7o4JLSaLowaV2mz5dDm9lYwMjOhi08pB394TwzBkBXTYePhBFFTK8pT7+He+RTkRidxnplTRGttI5or6xlrLKxc7VF3v5y+CBK6a5jbW2Pwiqfg/8ywx38zsTRDz3B/9Az3x5DVM5B+KBa3dp2FqLmVlzyaSWhrNwcSmoRWHSs3BwQ/PwoBs4fDxMKM9TgTCzMMWDgBvpNDEfPuXlTcLehy2uEe3ldWaHdHspKEhtKdjDyHB8B/ZgS8RgU/7pvB9QcwdetyHFu0GXUFFbxPgduQ0CQ0V5z8PeA7JQy+U8Jg6az6EJmJlTm8xw/E7X0xKp+jKusB49+te5LQJLQcHPv2hM/EQfCeGAJbL2dezimVSPHgelaXJ1ekEqnMaIoNCU1Cd46ebqF+8BwRCK+RwbBy5Ti22/7fvZMEAoWH3th2EhVpXcuhJW1i1OaXwcHvyQo4Gw8nKNNmzDnYCyaWZqi7X46KtAK0S9tJaH3FyNQY9j5ucOzjDkd/D7gO8oFj356cc+KW6gbkn7+NgsupKL6ZA3tvVzy9+3W5z6/OLkbqLxd5ef9VmUUyQps7WMPEwox1JEUgFMBrdD8EPz8a7mF+T/wA64sqkfzDGWSfSiSh9QmfyaEYsGCcUvI+QtTcivsX7iD7VCKKb2Q/UUdcmVGIirsFcOnfm/X5KT/G8BYFKzOL4DdtsOyNoaeTTI5tZmcF/2eGInDOCNaREBsPJ4z+94uQSqTI5bD2kITWETwjAuAU4KnUc8pu5yHzWALyziVD3My+urqpoo71sda6JuTF3OLtc1RlFjH+3dbL+bHQroN8ETB7OLwnDISRCbevy8zGgiK0PnHl499QlV2MgS9PgLk9ew1xXUEF8s4lI/tUIufJCoGcKe/8mNuQiiS8fY5KFqFd+veGtbsj/J8ZpvTi1pw/byDjj3gSWp9ol0qReuAi0n+PRc+h/nAO8oKlsy3a24GW6nrU5JehPCUf9Q+Ub60lryY5n8foDABt9c1oKKmGdadWuv3njVP6XI2lNbi+9TjyziYDdFOon0jaxCi4chcFV+7ydk62URFRUytKknJ4/wxVGUUyQitDU0UdUn6MQcbheMY+1CR0N8bU2px1wqU4MYvXdMPMzgq+kaFw6OMOVWtBUn+5hOyoRF7fFwkNw5qEYeNBQib4KEn1GB6EvjPC4TUyGEITI6VTrYIrd5F2MBYPrmfSF0ZCy8cp0Iv1saKrGSqf1znYC76RYfCbEgZzB+UXwjaW1SLr+DVkHr2KxrJa+qJIaI7iBTIPBdYXVSpshQuG5uW+kaHwjQxTavavY4ek+5fuIOv4NRTGZ3DquwEAPQZ4w9LFFvcvp3bLVISE7ih0kBdLdOa2S5WFkw36PDUEflMGq5wb43HbATFi1u9R6jk2Hk6Y9s0KCE2M0Fhag4Qtx5B/7hYJ3R2xcLSBbS8XxscK4xUILRBgyIqnEPy3MZwnPzrWkNQXV8sUJRmZmcDM1hKtdU2cT+UzadDjvNzK1R7jP34JuWOTEPfZIYgaW0jo7oRbqB/YpsoV3RBa9bBDvxfHcm6G2FBSjcK4NDxIyERJUi5ETS1YGPOpzE2iraczyu/e534PwDB76hsZCqcAD5x9c1e3WAlDQj8SOsyXOd2IS4ekTaxwUuPogo0InDsCniOCGHPmhuIq5J27hbwzSYwzhFXZD2RSHjsfV6WEdg72Ym3UOGPnakSt+EZuKzISWkcIXToFniOCUBB7FzmnElWaIewZ7s/49/wLKZyeX5Nfiqsb/wA2/gGrHnaw8XSGuYM1xM1tqCsoV7i6peLufRmhHZXIw208nORO0JjZWWHM+/NxdOFGElrXyTqegMC5IxC6ZAoGLY5EYXw60g5e4XwzZ+vlzJg/S9rEKIy9q9Iwm7LDa+V3CxA4t/MwIvcCLN/IMIXHOPi5Q2hsBKlYQn05dJmGkmpEr/keosaWh/XCI4MQ+eVSzPrpn/CbOlhhjw2vUcx9kwsup2ps850KhtTCOdCLU3mskakxAueOUHhc+u+xBi2zQTWaqUgrwOnXdjzRO8PBzx1j3p+HuYfegf/MCNabtl6jmYXOOaO5muLae2UyPx5jC1O5s5ePCHp2lNw1klKJFIlfn3iYEoE6J+kN5an3EbVyO1qqG9C5NcDId57D3EPvIGBWxBMR29LFDq6DfBkr4TS5g1S7tB2VDN393UJ95T7P2s0Bg5ZGQl6Pu9OrvkXK/vOgVmB6SFVmEU4u+xoNJdWMX/6I9c9hzm/r4Td1MARCAXwjQyEQChhLRTU901aeKpt2uA3uA3ntGEb/+0XWfiJt9c34c8U3aqkSJKE1SN39cpxcsoV1iMrGwwlj3p+HWfv/icA5zLln1onrmk+bGPJo9zA/1jw6fPUMuIX5sTY4P/fWbtZFBCS0ntFUUYdTy79GSRL7pjr2vm6MY8Y1+aVa2aa4PPUemFaxM61x9I0MRb8Xx7KeK/6Lw90qMneL7qNt9c0489oO5MfcVup5WccStPJ+G8tqGYugvEYEoXOZ68h3n2c9T150EjKPXgWona7hIRGJcf69fUg9wK31gFQsQXaU9toAME2ze44IfCJdmrx5KYzNTVkrA2M3HAKoP7QB096OhK+O4erGPxS2IJCIxHAb5KtTQjv6e8DKzQGWzraYsnU56xCdVCzBhX/92G0Kkbp9w/O0g1cQ8/ZuuZvEm1iYYfynL2PcxwtV2matq3TuFfKIvtPDEfnVMrmtwq5tOtLlrqgktJ5x/3Iqrnz0q8LjfCYOwuyf34Tn8ECN5/1Mu82GLp0i02WpI5lHr3bLPVW6vdBCIyH6zRsLrgX7kzcvxbA1s5Re/8d32iGPkqQcxH9xGEQ3FHrgoklwCe6l1HOCXxiNGTtf61K7AaWEvpap1Jh7zNt7aOV3dxTaOcgLIYsnQ7UFtJ54es8ahVPRfFB2J19uu7JHtNQ04MyanUqtaiGhDQQjMxOMeX8eY+WdRCRGS00jFO/DYoUpW5bDe2KIWt+rVCRBSXKu3GPEzW2IXvs96osqyeLuKHT4qhmsfeJubo/Cib9/xWmJktDECOP+d4FapbZ0toWtp7PcsfKYd/Z2+xGNbit0z3B/BD07kvWGKvWXi6gvqsSJJVvkTpWjQ1HQmP/Mg6O/B9SxidFTO1bJ3W3gzs8XOS9eIKENDKsedhj74XzGzvyiplZc/vCXx5MtrXVNOPP6DhTEpnEqqh/2xkxe36ttLxdM/3alwj4eXiODOe00QEIbWt5sYozxny5i7VYU//nvaCiukll2FfP2bk6bvbuF+bG2PlD6pjPAE9O/WwUrDiMpDn5uD6UmupfQEW/OgUs/5iG6tEOxyIm6wZqjXvzXT5yKmviYJncf0gfTvvmH3F7XnQlZNJHs7U5CB8yKeGJX2I6UpeQj4cujUNQY8eJ/9itsMmPj2bWdtXwjQxG5+VWYWJmDrQIPLE3RPTtV4REGKrRLv16IWDeH8bGm8lqcf2cvp8WiUpEEMev3oPzOPTkHqb7fyoAF4zH2g/mss5AFV1LxxwufsY5mDF4+jXJpQxfawtEGEzYsYpSkrb4Zp1//Tu4+Kp2RtIpw9s1dMrn2I1rrm1TayXb4W3MxZNUMViHv/noZ597aDVFzKxK3n2Q8xtHfA76TB5HFhiq0sbkpJn6+GJYudjKPiVseTkTU5CrfOailugHRa79HW0ML531SIKeab9LGv7Mu/ZKIxIj99CCubT7yePSl+HoWa33HkBXTYWRmQiYbmtACoQBjP5zPeBMoaRUhZv2eLi2rqskrRcz63U9s+yARiZWa3LDp6YjpO1ezVvA1ltUiatk2xtUm17ceZ6zltnJzwMCX6QbR4IQetnY2eo3pz7zyefWOLjUsx+NtKbJxpkPKknE4nnMxvfvgPnh69xusbXYfJGTi2MubWHvZVWU9QPbJ66y5uCo9qEGtwHSTsGVTGWcCm8prceaN73htUFhyMweH5n4Ce29XzulG8POjEf76M4x1JFKRBDd3RCHlpwt/bc/Mws0dUfCeFCLTtsDI1Bij3nsBUSu3KzwHRWgdZ8DC8Qh5ZTLjlPaxRZvV0m1T0ipCZUahQnlMbSwwYcMiDFs7i1HmmtwSnFiy5WETGA4iNlXU4dauaLBN8rDl5RSh9YR+L47BkJUz0Hn9YMr+87ixPYrzNg7qwDXEB2M/XMC4TZxULMHtvedwa89ZpeuYUw9cQt8ZQxkLrcJXzUBxYhZq75WB997Zgof/nShCq4mQVyZj6OszZVY8R63cjsRtJ7Ums5GpMYasnIFp21cwylycmI2jL21C0s7TKhXlS8US1tUpxhamGPfRQhiZ8hunwpZPQ8+h/hSh1TOcIUD4qhnoP3/cE7N6aQdjcWP7KbkLYNVNjwHeGPU/LzBGz7rCClzfehz3L97p+s3p9Szk/HkDflMHM25NN2ztbMRtOMjLZ7J2d4RriA9q8kpJaHUV6XuPH4iOs2nXt57g/d8slNxEM2zZVATMGi7TJ6+uoAK395xFzp83IJXw918j4ctj8BweyLgyPWBWBKpzipF28EqXX8dn0sO6b2M9GevWG6EtnW0x8fPFD7vct7ejIC4dKfvOofRWnhbHvoUInDMcoa9OhZmtpUxqkf57LO5dvKOW9KelpgFXNx3B2A/mMz4+bM1M1BdVdrmDqveE/y5kEApIaPBYJzxt2z9gbGGG9MNxSPvtCmrytfsv0H1wHwxbOwsOfu5PdD7NP5+CvLNJCreg4IPc0zfhMyEEvcb2Z/yxjf/kJUSv2clp0QJbuvF4mww9GQ7UC6Gt3RwQ99khPEjIVLiBjyZy+Ih1sxH07Eg0lFQj5/RNlNzIRtG1DDSW1mj87cR+ehAuA3rDwtGGsRRg0qYlOPPadyrNknbM0flMl7q90Hzss80nGUfikbTzNFprG7X+XlpqGnDlo18xedMSsNWOTNmyDOff26d0+tFn2l9Ct+uJ0N2uLwd46JNXnV2sEzI/ojAuDam/XGKPWhYPi7YCZkVwH7EZ6PPkahw9STlIaAMh8esTjDsAdOwYNWL9cxjx9rOcukAFddqEiMvmRSQ0wRtSsQTn390rs79MZwJmD8f071bLXVVu4WTz1+jGI1GMjUhoQrM0ltYgZv0ehatxnIO8MHPfOvT72xjGyNt//jiZKK4vNdcktIFReisPsZ/8png0wMIUQ9+YiVn718Fv6uDHDdSdAj0Zi5xMLM1olIPQDtmnEmHt5oDQV6cqPNbe1w1j3p8HiUiM5oo6WLk6MO4KZmpjQRGa0B7Ju6LljnyAoYeJtbsjo8wAWHubkNCExkj48ijSf48FX6UHJDShdeI/P4w7P10AH2WxTLORJDShca5vPY6Er44q3DBJEfKG+khoQqOkHriEc2/tQlt9s8rn6FiIRUITWqfgyl0cW7RZ5XYOjyvvSGhCV6gvqsSpZdtwfetxiJpboew6SRKa0DnapVLc+ekCDj+3ARlHrnJe22jbywXW7o4kNKGbNFXUIW7DQRyc8zFu7TmrsA4EAFwHeoNmCgndFru8Fje/jULyD2fQe9xA+E0dDI9h/owFScY6PgVOQhPo2MUpLzoJedFJMLOzgkdEANxC/eDg5wZTK3NUZhQhLzqJhCb0j9baRuSevonc0zdBrcAIgoQmCBKaIEhogoQmCBKaIEhogtCG0K9c3UhXj1ALXXGLs9C7I9bRlSa0gjLuUcpBGFbKsfheGe2tSxgEi++VCYTaynUIQh1OCdWVyxCEpvNnXnJoitKErkRnlYSmKE3oanR+LHRXbwwpShPajs6PHBZq6pdDEJpwTKhL+Q9B0Zm3HFrZtIPpF0RSE3zIrGx07uiukO9/CyQ1oUmZ5aYcqtwcktSENmXu7KxQH/IignJmlW8K+YrSJDWhjBN8RGcAYJR3V+8e7Xz/8mioj0Tm2w3OQndFahKb0IQLbJmE3PRCXVKT2JQnq0NmhUKrW2oSvHve6KlLZrULTTeHBN9Bq8tC8yU1iU0iq1tmzkLzKTWJTSKrS2alhOZbahKcBOZbZqWFVqfUBNFVmQEVpr5plTihqzKrFKEpWhO6KDIvxUkUrQldkpmXajuSmtAVmbucclAKQuiKyGoRmsQmtP3fXa3pAolNaDpN1Vj+S3KTxJp4Ha3e0JHkJC/f/D9GUtRMoPHV3AAAAABJRU5ErkJggg==">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%239E1F16'/%3E%3Ctext x='32' y='45' font-size='36' text-anchor='middle' fill='%23FFE7A3' font-family='serif'%3E戏%3C/text%3E%3C/svg%3E">
+<style>
+/* 适老化:字大、对比强、按钮大且间距宽,不依赖悬停和手势。
+   为照顾老旧手机浏览器,CSS 不用 aspect-ratio / inset,JS 不用 ?. 和 ??。 */
+:root {
+  --bg: #FBF5EA;
+  --card: #FFFFFF;
+  --ink: #2A1810;
+  --ink2: #5B4434;
+  --line: #E3D2BC;
+  --red: #9E1F16;
+  --red-soft: #FFF0EA;
+  --dark: #2A1810;
+}
+* { box-sizing: border-box; }
+html { font-size: 20px; -webkit-text-size-adjust: 100%; }
+html.big { font-size: 23px; }
+html.huge { font-size: 26px; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink); line-height: 1.5;
+  font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", "Source Han Sans SC", sans-serif;
+}
+button { font: inherit; color: inherit; cursor: pointer; -webkit-tap-highlight-color: rgba(0,0,0,.08); }
+button:focus-visible { outline: 4px solid #F2B705; outline-offset: 2px; }
+
+.bar {
+  position: sticky; top: 0; z-index: 20; display: flex; align-items: center;
+  min-height: 3.4rem; padding: .35rem 16px; background: var(--red); color: #fff;
+}
+.bar h1 { flex: 1; margin: 0; font-size: 1.45rem; letter-spacing: .15em; text-align: center; }
+.back {
+  min-height: 2.7rem; padding: 0 .8rem; font-size: 1.05rem; font-weight: 700;
+  border: 2px solid rgba(255,255,255,.85); border-radius: .7rem; background: transparent; color: #fff;
+}
+.bar .spacer { width: 4.6rem; }
+
+main { max-width: 720px; margin: 0 auto; padding: 16px 16px 8rem; }
+.view { display: none; }
+.view.active { display: block; }
+h2 { margin: .2rem 0 .8rem; font-size: 1.5rem; }
+.lead { margin: 0 0 1rem; font-size: 1.05rem; color: var(--ink2); }
+
+.grid { display: grid; grid-template-columns: 1fr 1fr; grid-gap: 14px; }
+.tile {
+  min-height: 6rem; padding: .6rem; border: 0; border-radius: 1rem; color: #fff;
+  font-size: 1.75rem; font-weight: 700; letter-spacing: .08em; line-height: 1.25;
+  box-shadow: 0 4px 0 rgba(0,0,0,.22);
+}
+.tile.long { padding: .6rem .3rem; font-size: 1.2rem; letter-spacing: 0; }
+.tile small { display: block; margin-top: .25rem; font-size: .8rem; font-weight: 400; letter-spacing: 0; }
+.tile:active, .item:active, .wide:active, .ctl:active { transform: translateY(2px); }
+
+.wide {
+  display: block; width: 100%; min-height: 4rem; margin: 0 0 14px; padding: .6rem 1rem;
+  border: 0; border-radius: 1rem; font-size: 1.3rem; font-weight: 700;
+  background: var(--dark); color: #fff; box-shadow: 0 4px 0 rgba(0,0,0,.25);
+}
+.wide.light { background: var(--card); color: var(--ink); border: 3px solid var(--red); box-shadow: none; }
+.wide .sub { display: block; font-size: .95rem; font-weight: 400; }
+
+.items { list-style: none; margin: 0; padding: 0; }
+.items li { margin-bottom: 12px; }
+.item {
+  display: block; width: 100%; min-height: 4.6rem; padding: .7rem 1rem; text-align: left;
+  background: var(--card); border: 2px solid var(--line); border-radius: .9rem;
+}
+.item .a { display: block; font-size: 1.25rem; font-weight: 700; line-height: 1.35; }
+.item .m { display: block; margin-top: .15rem; font-size: 1rem; color: var(--ink2); }
+.item .d { display: block; font-size: .85rem; color: var(--ink2); }
+.item.on { border-color: var(--red); background: var(--red-soft); }
+.item.on .a:before { content: "▶ "; color: var(--red); }
+.empty { padding: 1rem; font-size: 1.1rem; background: var(--card); border: 2px dashed var(--line); border-radius: .9rem; }
+
+.settings { margin-top: 1.6rem; padding: .8rem 1rem; background: var(--card); border: 2px solid var(--line); border-radius: .9rem; }
+.settings .label { font-size: 1.05rem; font-weight: 700; }
+.seg { display: grid; grid-template-columns: 1fr 1fr 1fr; grid-gap: 10px; margin-top: .5rem; }
+.seg button { min-height: 3.2rem; border: 2px solid var(--line); border-radius: .7rem; background: var(--bg); font-weight: 700; }
+.seg button[aria-pressed="true"] { background: var(--red); border-color: var(--red); color: #fff; }
+.foot { margin-top: 1.2rem; font-size: .9rem; color: var(--ink2); }
+
+/* 播放页:不播放时整块挪到屏幕外而不是 display:none,免得浏览器把隐藏的播放器暂停掉。 */
+.player { display: block; }
+.player.parked { position: fixed; left: -10000px; top: 0; width: 360px; }
+.now-aria { font-size: 1.5rem; font-weight: 700; line-height: 1.3; }
+.now-meta { margin: .2rem 0 .7rem; font-size: 1.1rem; color: var(--ink2); }
+.screen { position: relative; width: 100%; background: #000; border-radius: .7rem; overflow: hidden; }
+.screen:before { content: ""; display: block; padding-top: 56.25%; }
+.screen iframe, .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+.overlay {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 1rem; background: #1D120C; color: #fff; text-align: center; font-size: 1.2rem;
+}
+.overlay[hidden] { display: none; }
+.hint { margin: .5rem 0 0; font-size: 1rem; color: var(--ink2); }
+.banner {
+  margin-top: 12px; padding: .8rem 1rem; border-radius: .9rem; background: #FFF6D6;
+  border: 3px solid #E0B000; font-size: 1.15rem; font-weight: 700;
+}
+.banner[hidden] { display: none; }
+.banner button { display: block; width: 100%; min-height: 3.2rem; margin-top: .6rem; border: 2px solid var(--ink); border-radius: .7rem; background: #fff; font-weight: 700; }
+
+.controls { display: grid; grid-template-columns: 1fr 1fr; grid-gap: 12px; margin-top: 14px; }
+.controls .primary { grid-column: 1 / 3; }
+.ctl {
+  min-height: 4.6rem; padding: .4rem; border: 3px solid var(--ink); border-radius: 1rem;
+  background: var(--card); font-size: 1.15rem; font-weight: 700; line-height: 1.2;
+}
+.ctl svg { display: block; width: 1.7rem; height: 1.7rem; margin: 0 auto .2rem; fill: currentColor; }
+.ctl.primary { min-height: 4.2rem; background: var(--red); border-color: var(--red); color: #fff; font-size: 1.45rem; }
+.ctl.primary svg { display: inline-block; margin: 0 .4rem 0 0; vertical-align: -.3rem; }
+.ctl.small { min-height: 3.8rem; font-size: 1rem; }
+.ctl.small small { display: block; margin-top: .1rem; font-size: .85rem; font-weight: 400; }
+.ctl[aria-pressed="true"] { background: #FFE7A3; }
+.ctl:disabled { opacity: .35; }
+.pulse { animation: pulse 1.1s ease-in-out infinite; }
+@keyframes pulse { 50% { box-shadow: 0 0 0 .45rem rgba(158,31,22,.35); } }
+@media (prefers-reduced-motion: reduce) { .pulse { animation: none; box-shadow: 0 0 0 .3rem rgba(158,31,22,.45); } }
+.src { margin-top: 1rem; font-size: .85rem; color: var(--ink2); word-break: break-all; }
+
+.mini {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; display: flex; align-items: stretch;
+  padding: 10px 16px; padding-bottom: calc(10px + env(safe-area-inset-bottom)); background: var(--dark); color: #fff;
+}
+.mini[hidden] { display: none; }
+.mini-open { flex: 1; min-height: 3.6rem; margin-right: 10px; padding: .3rem .8rem; text-align: left; border: 2px solid #fff; border-radius: .8rem; background: transparent; color: #fff; }
+.mini-open span { display: block; font-size: .85rem; }
+.mini-open b { display: block; font-size: 1.1rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mini-stop { min-width: 5rem; border: 0; border-radius: .8rem; background: #fff; color: var(--dark); font-size: 1.15rem; font-weight: 700; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-prev" viewBox="0 0 24 24"><path d="M6 5h2.5v14H6zM20 5v14L9.5 12z"/></symbol>
+  <symbol id="i-next" viewBox="0 0 24 24"><path d="M15.5 5H18v14h-2.5zM4 5l10.5 7L4 19z"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><path d="M6 5h4.5v14H6zM13.5 5H18v14h-4.5z"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z"/></symbol>
+</svg>
+
+<header class="bar">
+  <button id="backBtn" class="back" type="button" hidden>‹ 返回</button>
+  <span id="backSpacer" class="spacer"></span>
+  <h1 id="barTitle">听戏</h1>
+  <span class="spacer"></span>
+</header>
+
+<main>
+  <section id="v-home" class="view">
+    <div id="resume"></div>
+    <button id="randomBtn" class="wide" type="button">随便听一段<span class="sub">各个剧种的名段轮着放</span></button>
+    <div id="genreGrid" class="grid"></div>
+    <div class="settings">
+      <div class="label">字的大小</div>
+      <div class="seg" id="sizeSeg">
+        <button type="button" data-size="">标准</button>
+        <button type="button" data-size="big">大</button>
+        <button type="button" data-size="huge">特大</button>
+      </div>
+    </div>
+    <p class="foot">唱段视频都在哔哩哔哩（B站）上，由各位上传者分享，这里只做挑选整理，不存音视频。听戏要联网，用手机流量会比较费，最好连上无线网（WiFi）。</p>
+  </section>
+
+  <section id="v-more" class="view">
+    <h2>更多剧种</h2>
+    <div id="moreGrid" class="grid"></div>
+  </section>
+
+  <section id="v-list" class="view">
+    <h2 id="listTitle"></h2>
+    <button id="playAllBtn" class="wide" type="button">从第一段开始，连着听</button>
+    <ol id="list" class="items"></ol>
+  </section>
+
+  <section id="v-player" class="player parked" aria-label="正在播放">
+    <div class="now-aria" id="pAria"></div>
+    <div class="now-meta" id="pMeta"></div>
+    <div class="screen">
+      <iframe id="frame" title="唱段播放器" src="about:blank" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen scrolling="no"></iframe>
+      <div id="overlay" class="overlay" hidden></div>
+    </div>
+    <p class="hint">没有声音？点一下画面，再点画面上的 ▶ 播放键或小喇叭。<br>画面上写着「非常抱歉…无法正常播放」？点「下一段」换一段听，过一会儿再回来试。</p>
+    <div id="banner" class="banner" role="status" aria-live="polite" hidden></div>
+    <div class="controls">
+      <button id="playBtn" class="ctl primary" type="button"></button>
+      <button id="prevBtn" class="ctl" type="button"><svg><use href="#i-prev"/></svg>上一段</button>
+      <button id="nextBtn" class="ctl" type="button"><svg><use href="#i-next"/></svg>下一段</button>
+    </div>
+    <div class="controls">
+      <button id="favBtn" class="ctl small" type="button"></button>
+      <button id="sleepBtn" class="ctl small" type="button"></button>
+    </div>
+    <div class="controls">
+      <button id="autoBtn" class="ctl small" type="button"></button>
+      <button id="listBtn" class="ctl small" type="button">唱段列表<small>回去挑别的</small></button>
+    </div>
+    <p class="src" id="pSrc"></p>
+  </section>
+</main>
+
+<div id="mini" class="mini" hidden>
+  <button id="miniOpen" class="mini-open" type="button"><span>正在播放（点这里回去）</span><b id="miniTitle"></b></button>
+  <button id="miniStop" class="mini-stop" type="button">停止</button>
+</div>
+
+<!-- 唱段目录:每条 = 剧种/剧目/唱段/演唱者/流派 + B 站 bvid 与分 P(p)、起播秒(t)、该分 P 时长(dur,秒)。
+     bvid 与时长都是在 B 站页面上核对过的,不要凭记忆补。字段说明见同目录 CLAUDE.md。 -->
+<script id="catalog" type="application/json">
+[
+{"genre": "京剧", "play": "霸王别姬", "aria": "看大王在帐中和衣睡稳", "artist": "梅兰芳", "school": "梅派", "bvid": "BV19E411F7fG", "p": 1, "t": 0, "dur": 182, "note": "1931年长城唱片", "src": "大帅谈古今｜梅兰芳老唱片《霸王别姬》选段，看大王在帐中和衣睡稳，1931年长城唱片"},
+{"genre": "京剧", "play": "贵妃醉酒", "aria": "海岛冰轮初转腾", "artist": "梅兰芳", "school": "梅派", "bvid": "BV1a64y167kP", "p": 1, "t": 0, "dur": 567, "note": "", "src": "叫我旭旭a｜【京剧】贵妃醉酒-梅兰芳（海岛冰轮初转腾唱段）"},
+{"genre": "京剧", "play": "锁麟囊", "aria": "耳听得悲声惨心中如捣", "artist": "程砚秋", "school": "程派", "bvid": "BV1294y187A3", "p": 1, "t": 0, "dur": 183, "note": "1941年唱片", "src": "休恋逝水2021｜【锁麟囊·耳听得悲声惨心中如捣】程砚秋1941年唱片，声腔行云流水，错落有致，越听越上头。"},
+{"genre": "京剧", "play": "红娘", "aria": "叫张生隐藏在棋盘之下", "artist": "荀慧生", "school": "荀派", "bvid": "BV1ZW411W7K5", "p": 1, "t": 0, "dur": 395, "note": "", "src": "孤云出岫ヽ｜京剧荀慧生《红娘》叫张生隐藏在棋盘之下"},
+{"genre": "京剧", "play": "甘露寺", "aria": "劝千岁杀字休出口", "artist": "马连良", "school": "马派", "bvid": "BV1YH4meEEmx", "p": 1, "t": 0, "dur": 185, "note": "1938年国乐唱片", "src": "孙觉非｜马连良《甘露寺》选段　劝千岁杀字休出口（1938年国乐唱片）"},
+{"genre": "京剧", "play": "徐策跑城", "aria": "湛湛青天不可欺", "artist": "周信芳", "school": "麒派", "bvid": "BV1sW411W7jv", "p": 1, "t": 0, "dur": 460, "note": "", "src": "孤云出岫ヽ｜京剧《徐策跑城》选段 湛湛青天不可欺 周信芳"},
+{"genre": "京剧", "play": "赤桑镇", "aria": "自幼儿蒙嫂娘训教抚养", "artist": "裘盛戎", "school": "裘派", "bvid": "BV1Zb411s7uC", "p": 3, "t": 0, "dur": 150, "note": "1961年实况，裘少戎配像", "src": "十净九裘｜【裘盛戎专辑】《赤桑镇》唱段 · 3自幼儿蒙嫂娘训教抚养"},
+{"genre": "京剧", "play": "定军山", "aria": "这一封书信来得巧", "artist": "谭富英", "school": "谭派", "bvid": "BV1RW411i7SZ", "p": 1, "t": 0, "dur": 95, "note": "音配像", "src": "猛虎下了花果山｜谭富英（音） 定军山 这一封书信来得巧_高清"},
+{"genre": "京剧", "play": "望江亭", "aria": "独守空帏暗长叹", "artist": "张君秋", "school": "张派", "bvid": "BV1ks411T7ru", "p": 1, "t": 0, "dur": 355, "note": "", "src": "谁动了我的榴莲｜张君秋 京剧四小名旦名剧《望江亭》独守空帷暗长叹"},
+{"genre": "京剧", "play": "文昭关", "aria": "一轮明月照窗前", "artist": "杨宝森", "school": "杨派", "bvid": "BV1vUG4zmEJG", "p": 1, "t": 0, "dur": 454, "note": "音配像", "src": "掤捋挤按雀尾生｜杨宝森《文昭关》伍员唱段：一轮明月照窗前（音配像）"},
+{"genre": "京剧", "play": "野猪林", "aria": "大雪飘扑人面", "artist": "李少春", "school": "李派", "bvid": "BV1Fe411s75Y", "p": 1, "t": 0, "dur": 525, "note": "", "src": "大帅谈古今｜京剧《野猪林》选段，李少春饰林冲，大雪飘扑人面朔风阵阵透骨寒"},
+{"genre": "京剧", "play": "钓金龟", "aria": "叫张义我的儿听娘教训", "artist": "李多奎", "school": "李派老旦", "bvid": "BV1Mt411t7gQ", "p": 1, "t": 0, "dur": 362, "note": "音配像，兰文云配像", "src": "Buer_Guo｜京剧《钓金龟》叫张义选段  李多奎演唱，兰文云配像"},
+{"genre": "京剧", "play": "智取威虎山", "aria": "打虎上山·穿林海跨雪原", "artist": "童祥苓", "school": "", "bvid": "BV1J7zRYtEfk", "p": 1, "t": 0, "dur": 449, "note": "京剧电影选段", "src": "音乐是最美的语言｜怀念童祥苓先生。无法超越的就是经典，京剧电影《智取威虎山》选段《打虎上山》"},
+{"genre": "京剧", "play": "红灯记", "aria": "都有一颗红亮的心", "artist": "刘长瑜", "school": "", "bvid": "BV1b7411o7J6", "p": 1, "t": 0, "dur": 214, "note": "", "src": "大帅谈古今｜现代京剧《红灯记》选段，都有一颗红亮的心，刘长瑜、高玉倩"},
+{"genre": "京剧", "play": "沙家浜", "aria": "智斗", "artist": "洪雪飞、马长礼、周和桐", "school": "", "bvid": "BV1Ls411z7Uw", "p": 1, "t": 0, "dur": 300, "note": "", "src": "知鱼yytmoon｜京剧《沙家浜》经典点选段— 智斗(洪雪飞 马长礼 周和同)"},
+{"genre": "豫剧", "play": "花木兰", "aria": "刘大哥讲话理太偏", "artist": "常香玉", "school": "常派", "bvid": "BV1xE411M7oL", "p": 1, "t": 0, "dur": 109, "note": "", "src": "唱念做打梨园曲｜献礼女神节：豫剧名家常香玉《花木兰》刘大哥讲话理太偏 谁说女子不如男"},
+{"genre": "豫剧", "play": "白蛇传", "aria": "哭啼啼把官人急忙搀起", "artist": "常香玉", "school": "常派", "bvid": "BV1jt4y1y7jH", "p": 1, "t": 0, "dur": 463, "note": "断桥一折", "src": "太保推杯换大斗｜【缅怀豫剧大师常香玉】《断桥》哭啼啼把官人急忙掺起"},
+{"genre": "豫剧", "play": "穆桂英挂帅", "aria": "辕门外三声炮如同雷震", "artist": "马金凤", "school": "马派", "bvid": "BV18b411u7W1", "p": 1, "t": 0, "dur": 412, "note": "", "src": "A爱听戏曲网｜豫剧-穆桂英挂帅-辕门外三声炮如同雷震-马金凤"},
+{"genre": "豫剧", "play": "宇宙锋", "aria": "坐龙车出相府悲愤恨怨", "artist": "陈素真", "school": "陈派", "bvid": "BV1y7411u7PK", "p": 1, "t": 0, "dur": 477, "note": "", "src": "王老儿的小可爱｜豫剧皇后 六大名旦之首 陈素真《宇宙锋》坐龙车出相府悲愤恨怨"},
+{"genre": "豫剧", "play": "桃花庵", "aria": "九尽春回杏花开", "artist": "崔兰田", "school": "崔派", "bvid": "BV1SJ411b7bg", "p": 1, "t": 0, "dur": 705, "note": "早期录音，张宝英配像", "src": "屋顶上的喵咪｜【豫剧】《桃花庵》（九尽春回杏花开）崔兰田早期唱腔（张宝英配像）经典珍藏版"},
+{"genre": "豫剧", "play": "秦雪梅", "aria": "秦雪梅见夫灵悲声大放", "artist": "阎立品", "school": "阎派", "bvid": "BV1A4411f7Xs", "p": 1, "t": 0, "dur": 279, "note": "", "src": "看戏台｜豫剧阎立品《秦雪梅 》见夫灵悲声大放"},
+{"genre": "豫剧", "play": "三哭殿", "aria": "下位去劝一劝贵妃娘娘", "artist": "唐喜成", "school": "唐派", "bvid": "BV18b411u7W1", "p": 6, "t": 0, "dur": 425, "note": "", "src": "A爱听戏曲网｜豫剧-三哭殿-下位去劝一劝贵妃娘娘-唐喜成"},
+{"genre": "豫剧", "play": "七品芝麻官", "aria": "当官不为民做主，不如回家卖红薯", "artist": "牛得草", "school": "牛派", "bvid": "BV18g411o7o5", "p": 1, "t": 0, "dur": 213, "note": "", "src": "河南移动戏曲频道｜【缅怀大师】豫剧名丑牛得草，当官不为民做主 不如回家卖红薯！"},
+{"genre": "豫剧", "play": "打金枝", "aria": "有为王坐江山非容易", "artist": "刘忠河、黄爱菊", "school": "刘派", "bvid": "BV18b411u7W1", "p": 10, "t": 0, "dur": 301, "note": "", "src": "A爱听戏曲网｜豫剧-打金枝-有为王坐江山非容易-刘忠河黄爱菊"},
+{"genre": "豫剧", "play": "铡美案", "aria": "要凭据有凭据", "artist": "李斯忠", "school": "李派", "bvid": "BV1S7411G7qz", "p": 1, "t": 0, "dur": 260, "note": "劝驸马一折", "src": "唱念做打梨园曲｜豫剧泰斗中原黑脸王李斯忠《铡美案》要凭据有凭据 劝驸马一折 拍电影没用李斯忠大师真可惜"},
+{"genre": "豫剧", "play": "蝴蝶杯", "aria": "自从公子闯下祸", "artist": "桑振君", "school": "桑派", "bvid": "BV1sg4y1t7pv", "p": 1, "t": 0, "dur": 340, "note": "投衙一折", "src": "唱念做打梨园曲｜豫剧泰斗桑振君《蝴蝶杯》投衙 自从公子闯下祸"},
+{"genre": "豫剧", "play": "朝阳沟", "aria": "走一道岭来翻一架山", "artist": "魏云、王善朴", "school": "", "bvid": "BV1bu411C7Ne", "p": 1, "t": 0, "dur": 360, "note": "", "src": "素砚戏语｜走一道岭来翻一架山-《朝阳沟》豫剧名家魏云、王善朴 演唱"},
+{"genre": "豫剧", "play": "朝阳沟", "aria": "亲家母你坐下", "artist": "高洁、杨华瑞", "school": "", "bvid": "BV1wU4y1P7HA", "p": 1, "t": 0, "dur": 166, "note": "", "src": "河南移动戏曲频道｜【戏曲】豫剧名家高洁、杨华瑞等共唱《朝阳沟》选段：亲家母你坐下"},
+{"genre": "豫剧", "play": "程婴救孤", "aria": "无情棍打得我皮开肉绽", "artist": "李树建", "school": "", "bvid": "BV1CZcbeSE1z", "p": 1, "t": 0, "dur": 418, "note": "维也纳金色大厅演出", "src": "河南卫视｜豫剧名家李树建维也纳金色大厅倾情演绎豫剧经典《程婴救孤》选段。"},
+{"genre": "曲剧", "play": "卷席筒", "aria": "小仓娃我离了登封小县", "artist": "海连池", "school": "海派", "bvid": "BV1qG41137HS", "p": 1, "t": 0, "dur": 308, "note": "", "src": "呆萌滴小宝宝｜曲剧《卷席筒》小仓娃我离了登封小县  海连池"},
+{"genre": "曲剧", "play": "陈三两", "aria": "自幼儿随爹爹苦读文章", "artist": "张新芳", "school": "张派", "bvid": "BV1JW411C7bG", "p": 1, "t": 0, "dur": 411, "note": "", "src": "谁动了我的榴莲｜曲剧皇后张新芳大师《陈三两》经典唱段 自幼儿随爹爹苦读文章"},
+{"genre": "曲剧", "play": "风雪配", "aria": "今日是我出闺的前一晚上", "artist": "王秀玲", "school": "王派", "bvid": "BV1ds411T7sY", "p": 1, "t": 0, "dur": 423, "note": "", "src": "赏听梨园｜曲剧《风雪配》今日是我出闺的前一晚上 王秀玲 名家名段"},
+{"genre": "越调", "play": "收姜维", "aria": "四千岁你莫要羞愧难当", "artist": "申凤梅", "school": "申派", "bvid": "BV18b411u7JL", "p": 7, "t": 0, "dur": 184, "note": "", "src": "A爱听戏曲网｜越调-收姜维-四千岁你们要羞愧难当-申凤梅"},
+{"genre": "越调", "play": "诸葛亮吊孝", "aria": "诸葛亮在灵前泪流不尽", "artist": "申凤梅", "school": "申派", "bvid": "BV18b411u7JL", "p": 19, "t": 0, "dur": 315, "note": "", "src": "A爱听戏曲网｜越调《诸葛亮吊孝》选段 诸葛亮在灵前泪流不尽 申凤梅"},
+{"genre": "越调", "play": "白奶奶醉酒", "aria": "适才房中打了一个盹", "artist": "毛爱莲", "school": "毛派", "bvid": "BV18b411u7t7", "p": 1, "t": 0, "dur": 361, "note": "", "src": "A爱听戏曲网｜越调-白奶奶醉酒 -适才房中打了一个盹-毛爱莲"},
+{"genre": "昆曲", "play": "牡丹亭·游园", "aria": "原来姹紫嫣红开遍", "artist": "张继青", "school": "", "bvid": "BV1o7411g78F", "p": 1, "t": 0, "dur": 349, "note": "皂罗袍", "src": "六亿神州皆舜尧｜天籁之音、极尽婉转，终极缠绵。《张继青 昆曲 牡丹亭 皂罗袍》"},
+{"genre": "昆曲", "play": "十五贯", "aria": "访鼠测字", "artist": "周传瑛、王传淞", "school": "", "bvid": "BV1C54y1s77f", "p": 1, "t": 0, "dur": 815, "note": "1956年电影", "src": "兰雅伯｜【高清修缮】昆曲电影《十五贯》“访鼠测字”选段王传淞 周传瑛主演1956年"},
+{"genre": "昆曲", "play": "玉簪记·琴挑", "aria": "长清短清", "artist": "华文漪、岳美缇", "school": "", "bvid": "BV1tM41157MJ", "p": 16, "t": 0, "dur": 528, "note": "朝元歌，昆曲精粹", "src": "顏子樂｜[昆曲精粹][玉簪记.琴挑.朝元歌][华文漪.岳美缇]"},
+{"genre": "昆曲", "play": "长生殿·小宴", "aria": "天淡云闲", "artist": "蔡正仁", "school": "", "bvid": "BV1YV4y127CX", "p": 11, "t": 0, "dur": 163, "note": "粉蝶儿", "src": "终身学习的好少年｜《长生殿·小宴》【粉蝶儿】"},
+{"genre": "昆曲", "play": "单刀会·刀会", "aria": "大江东去浪千叠", "artist": "侯少奎", "school": "", "bvid": "BV1B7411B7hX", "p": 1, "t": 0, "dur": 606, "note": "新水令·驻马听", "src": "阊门梦断｜《单刀会·刀会》【新水令】【驻马听】  大江东去浪千叠 侯少奎"},
+{"genre": "昆曲", "play": "长生殿·哭像", "aria": "叨叨令·脱布衫", "artist": "俞振飞", "school": "", "bvid": "BV1fs411T7NR", "p": 10, "t": 0, "dur": 240, "note": "1955年中国唱片", "src": "sietkeu｜俞振飞《长生殿 哭像》【叨叨令】【脱布衫】1955年中国唱片公司"},
+{"genre": "昆曲", "play": "长生殿·弹词", "aria": "恰正好呕呕哑哑霓裳歌舞", "artist": "计镇华", "school": "", "bvid": "BV1tM41157MJ", "p": 21, "t": 0, "dur": 143, "note": "六转，昆曲精粹", "src": "顏子樂｜[昆曲精粹][长生殿.弹词.六转][计镇华]"},
+{"genre": "昆曲", "play": "烂柯山", "aria": "痴梦", "artist": "梁谷音", "school": "", "bvid": "BV1tM41157MJ", "p": 7, "t": 0, "dur": 432, "note": "昆曲精粹", "src": "顏子樂｜[昆曲精粹][烂柯山.痴梦][梁谷音]"},
+{"genre": "昆曲", "play": "牡丹亭·惊梦", "aria": "则为你如花美眷", "artist": "沈丰英、俞玖林", "school": "", "bvid": "BV1RA4y1Z7JD", "p": 1, "t": 0, "dur": 404, "note": "山桃红，青春版牡丹亭", "src": "晶英文化｜\"则为你如花美眷，似水流年\" 沈丰英X俞玖林 苏昆《牡丹亭·惊梦》<山桃红>白先勇青春版"},
+{"genre": "越剧", "play": "红楼梦", "aria": "天上掉下个林妹妹", "artist": "徐玉兰、王文娟", "school": "徐派、王派", "bvid": "BV1ED421s7PA", "p": 1, "t": 0, "dur": 725, "note": "越剧电影（修复版）", "src": "花带plus｜天上掉下个林妹妹！越剧电影《红楼梦》（修复版）选段"},
+{"genre": "越剧", "play": "梁山伯与祝英台", "aria": "十八相送", "artist": "袁雪芬、范瑞娟", "school": "袁派、范派", "bvid": "BV1uY4y1S7pp", "p": 1, "t": 0, "dur": 516, "note": "", "src": "鸡蛋_小太阳｜【梁祝】出了城~过了关~袁雪芬与范瑞娟演绎十八相送。"},
+{"genre": "越剧", "play": "红楼梦·葬花", "aria": "绕绿堤拂柳丝穿过花径", "artist": "王文娟", "school": "王派", "bvid": "BV1K64y1s7Zo", "p": 1, "t": 0, "dur": 654, "note": "", "src": "伟wei_｜越剧《红楼梦·葬花》王文娟 绕绿堤拂柳丝穿过花径"},
+{"genre": "越剧", "play": "红楼梦·宝玉哭灵", "aria": "林妹妹，我来迟了", "artist": "徐玉兰", "school": "徐派", "bvid": "BV18a2QBLEGx", "p": 1, "t": 0, "dur": 595, "note": "1984年便装演唱", "src": "野渡云水间｜[越剧]徐玉兰-红楼梦-宝玉哭灵（84年便装）"},
+{"genre": "越剧", "play": "祥林嫂", "aria": "抬头问苍天", "artist": "袁雪芬", "school": "袁派", "bvid": "BV1M14y1p7Ay", "p": 42, "t": 0, "dur": 641, "note": "1978年版", "src": "Jluke｜42 抬头问苍天（1978）"},
+{"genre": "越剧", "play": "何文秀", "aria": "算命", "artist": "尹桂芳", "school": "尹派", "bvid": "BV1ud4y1s7mJ", "p": 2, "t": 0, "dur": 307, "note": "", "src": "-再向人间陌路逢｜尹桂芳绝版《何文秀·算命》"},
+{"genre": "越剧", "play": "碧玉簪·三盖衣", "aria": "谯楼打罢二更鼓", "artist": "金采风", "school": "金派", "bvid": "BV1q34y1m75J", "p": 1, "t": 0, "dur": 333, "note": "", "src": "着哇璀错｜越剧【碧玉簪】三盖衣唱段 金采风"},
+{"genre": "越剧", "play": "血手印", "aria": "法场祭夫", "artist": "戚雅仙", "school": "戚派", "bvid": "BV1pT411Q7JV", "p": 1, "t": 0, "dur": 229, "note": "纪录片修复版", "src": "白糖就叫不咸的盐｜【超清修复版】越剧《血手印 法场祭夫》戚雅仙演唱（纪录片版）"},
+{"genre": "越剧", "play": "王老虎抢亲", "aria": "寄闺", "artist": "毕春芳、戚雅仙", "school": "毕派、戚派", "bvid": "BV1DE411p7Rs", "p": 1, "t": 0, "dur": 318, "note": "晚会版", "src": "的笃越剧公众号｜越剧-毕春芳、戚雅仙：王老虎抢亲-寄闺（晚会版）"},
+{"genre": "越剧", "play": "情探", "aria": "行路", "artist": "傅全香", "school": "傅派", "bvid": "BV11i4y1D7eD", "p": 14, "t": 0, "dur": 434, "note": "", "src": "银粟玉沙｜《情探·行路》傅全香"},
+{"genre": "越剧", "play": "珍珠塔", "aria": "我只道骨肉总有骨肉情", "artist": "陆锦花", "school": "陆派", "bvid": "BV1YW411S73F", "p": 1, "t": 0, "dur": 283, "note": "", "src": "可爱漂亮的人｜越剧 珍珠塔 我只道骨肉总有骨肉情 陆锦花_标清"},
+{"genre": "黄梅戏", "play": "天仙配", "aria": "树上的鸟儿成双对（满工对唱）", "artist": "严凤英、王少舫", "school": "", "bvid": "BV1cF411c7cm", "p": 1, "t": 0, "dur": 131, "note": "", "src": "济霖777｜高清｜天仙配·满工对唱（严凤英、王少舫）"},
+{"genre": "黄梅戏", "play": "女驸马", "aria": "谁料皇榜中状元", "artist": "严凤英", "school": "严派", "bvid": "BV1k54y1Q7wk", "p": 1, "t": 0, "dur": 252, "note": "", "src": "诗诗12345｜严凤英《女附马》谁料皇榜中状元"},
+{"genre": "黄梅戏", "play": "女驸马", "aria": "为救李郎离家园", "artist": "韩再芬", "school": "", "bvid": "BV13W411B7LT", "p": 1, "t": 0, "dur": 222, "note": "", "src": "孤云出岫ヽ｜黄梅戏《女驸马》选段 为救李郎离家园 韩再芬"},
+{"genre": "黄梅戏", "play": "夫妻观灯", "aria": "夫妻观灯", "artist": "严凤英、王少舫", "school": "", "bvid": "BV1FE411q7as", "p": 1, "t": 0, "dur": 437, "note": "", "src": "-折戾主戾-｜黄梅戏《夫妻观灯》严凤英 王少舫"},
+{"genre": "黄梅戏", "play": "打猪草", "aria": "对花", "artist": "吴琼、黄新德", "school": "", "bvid": "BV18Y4y1y7nC", "p": 1, "t": 0, "dur": 248, "note": "", "src": "云鹤知音｜吴琼、黄新德一首《对花》黄梅戏，嗓音清脆韵味十足，太好听了"},
+{"genre": "黄梅戏", "play": "小辞店", "aria": "花开花放花花世界", "artist": "马兰", "school": "", "bvid": "BV1v54y1i7U9", "p": 1, "t": 0, "dur": 470, "note": "", "src": "碧棠哥哥｜黄梅戏《小辞店》选段   ‘花开发放花花世界’   演唱： 马兰"},
+{"genre": "黄梅戏", "play": "孟姜女", "aria": "梦会", "artist": "黄新德、马兰", "school": "", "bvid": "BV1Jb41137jW", "p": 1, "t": 0, "dur": 298, "note": "", "src": "戲夢Impetus｜黄新德 与 马兰 共同演唱了《孟姜女》选段——梦会"},
+{"genre": "黄梅戏", "play": "徽州女人", "aria": "烟雨蒙蒙一把伞", "artist": "韩再芬", "school": "", "bvid": "BV1Fs41137PX", "p": 1, "t": 0, "dur": 359, "note": "", "src": "韩梅傲雪再芬芳｜黄梅戏《徽州女人·烟雨蒙蒙》选段1 (韩再芬)"},
+{"genre": "黄梅戏", "play": "天仙配", "aria": "下凡", "artist": "潘璟琍", "school": "", "bvid": "BV1Rb4y1b7Wg", "p": 1, "t": 0, "dur": 165, "note": "1953年录音", "src": "雷雨wsl｜黄梅戏 天仙配·下凡 潘璟琍演唱 1953年录音"},
+{"genre": "评剧", "play": "刘巧儿", "aria": "巧儿我自幼儿许配赵家", "artist": "新凤霞", "school": "新派", "bvid": "BV1u24y1d7tp", "p": 1, "t": 0, "dur": 176, "note": "", "src": "紫燕桐音｜评剧《刘巧儿》选段(巧儿我自幼儿许配赵家)"},
+{"genre": "评剧", "play": "花为媒", "aria": "报花名", "artist": "新凤霞、赵丽蓉", "school": "新派", "bvid": "BV1HF6CYPErw", "p": 1, "t": 0, "dur": 476, "note": "", "src": "丨糖三葬丨｜【春打六九头】评剧《花为媒.报花名》新凤霞  赵丽蓉"},
+{"genre": "评剧", "play": "秦香莲", "aria": "琵琶词", "artist": "小白玉霜", "school": "白派", "bvid": "BV1Uu41167t5", "p": 1, "t": 0, "dur": 500, "note": "", "src": "评剧小生-李铮｜【评剧】《秦香莲：琵琶词》小白玉霜"},
+{"genre": "评剧", "play": "包公赔情", "aria": "蒙嫂娘十八年将弟来抚养", "artist": "魏荣元", "school": "魏派", "bvid": "BV14f4y1P737", "p": 1, "t": 0, "dur": 340, "note": "", "src": "钱明的评剧家园｜魏荣元《包公赔情》蒙嫂娘十八年将弟抚养"},
+{"genre": "评剧", "play": "杨三姐告状", "aria": "尊厅长休要怒气发", "artist": "谷文月", "school": "新派", "bvid": "BV1yD4y1R7TJ", "p": 1, "t": 0, "dur": 119, "note": "", "src": "玉石桥斜倚把栏杆靠｜这段儿真不错！谷文月《杨三姐告状》尊厅长"},
+{"genre": "评剧", "play": "对花枪", "aria": "训罗成", "artist": "筱俊亭", "school": "筱派", "bvid": "BV1gP411D76W", "p": 1, "t": 0, "dur": 278, "note": "1987年", "src": "萌王星白｜评剧《对花枪》训罗成，筱俊亭，1987"},
+{"genre": "评剧", "play": "小女婿", "aria": "小河流水", "artist": "韩少云", "school": "韩派", "bvid": "BV1Eh411J77Y", "p": 1, "t": 0, "dur": 389, "note": "", "src": "钱明的评剧家园｜韩少云《小女婿》小河流水"},
+{"genre": "评剧", "play": "牧羊卷", "aria": "席棚", "artist": "花淑兰", "school": "花派", "bvid": "BV1Cb41167h4", "p": 1, "t": 0, "dur": 629, "note": "", "src": "SpringOfApril｜花淑兰-牧羊卷（席棚）"},
+{"genre": "评剧", "play": "向阳商店", "aria": "咱弟兄", "artist": "魏荣元、马泰", "school": "", "bvid": "BV1Pe4y1Y7ED", "p": 1, "t": 0, "dur": 372, "note": "", "src": "高山流水1980｜【向阳商店】咱弟兄-魏荣元马泰（评剧）"},
+{"genre": "秦腔", "play": "三滴血", "aria": "祖籍陕西韩城县", "artist": "陈妙华", "school": "", "bvid": "BV1Xv4y1J7Q8", "p": 1, "t": 0, "dur": 102, "note": "清唱", "src": "瓦尔登散人｜【秦腔·世界名曲】陈妙华《三滴血》祖籍陕西韩城县（清唱）"},
+{"genre": "秦腔", "play": "周仁回府·夜逃", "aria": "夫妻们分生死人世至痛", "artist": "任哲中", "school": "任派", "bvid": "BV1gRWJzDEKp", "p": 1, "t": 0, "dur": 295, "note": "", "src": "无题娃娃｜秦腔｜任哲中《周仁回府·夜逃》夫妻们分生死人世至痛"},
+{"genre": "河北梆子", "play": "辕门斩子", "aria": "休提起三国里周郎年少", "artist": "王玉磬、王伯华", "school": "", "bvid": "BV1fM4y1h7ua", "p": 1, "t": 0, "dur": 502, "note": "", "src": "萌王星白｜河北梆子《辕门斩子》休提起三国里周郎年少，王玉磬、王伯华"},
+{"genre": "河北梆子", "play": "南北合", "aria": "十五年", "artist": "裴艳玲", "school": "", "bvid": "BV1v44y1a7H8", "p": 1, "t": 0, "dur": 629, "note": "", "src": "戏曲多多｜河北梆子《南北合》裴艳玲 十五年"},
+{"genre": "晋剧", "play": "打金枝", "aria": "劝宫", "artist": "王爱爱", "school": "", "bvid": "BV1Wv411a7dY", "p": 1, "t": 0, "dur": 440, "note": "1979年录制", "src": "松子哥哥的弟弟｜【晋剧经典】《打金枝•劝宫》王爱爱 1979年录制"},
+{"genre": "晋剧", "play": "坐楼杀惜", "aria": "紧流水", "artist": "丁果仙、郭兰英", "school": "", "bvid": "BV1jZ4y1m7SK", "p": 1, "t": 0, "dur": 232, "note": "1961年实况录音", "src": "晋青会韩大卫｜【丁果仙 郭兰英】超快节奏晋剧——紧流水（简介：坐楼杀惜，1961年实况录音）"},
+{"genre": "川剧", "play": "别宫出征", "aria": "坐着坐着生杀气", "artist": "陈书舫", "school": "", "bvid": "BV1kK411n7uP", "p": 1, "t": 0, "dur": 133, "note": "高腔", "src": "周浦大宝贝｜【川剧名家名段（高腔）】《别宫出征》“坐着坐着生杀气”陈书舫"},
+{"genre": "川剧", "play": "思凡", "aria": "思凡", "artist": "沈铁梅", "school": "", "bvid": "BV11b411x7Be", "p": 1, "t": 0, "dur": 482, "note": "", "src": "女裙钗｜川剧《思凡》选段    沈铁梅"},
+{"genre": "粤剧", "play": "昭君出塞", "aria": "昭君出塞", "artist": "红线女", "school": "红派", "bvid": "BV1QY411T7Tt", "p": 1, "t": 0, "dur": 598, "note": "", "src": "水月纸灯｜[4k]红线女-昭君出塞"},
+{"genre": "粤剧", "play": "荔枝颂", "aria": "荔枝颂", "artist": "红线女", "school": "红派", "bvid": "BV1xs41147F2", "p": 1, "t": 0, "dur": 273, "note": "粤曲", "src": "寒夜琴挑｜广东《荔枝颂》红线女"}
+]
+</script>
+
+<script>
+(function () {
+  "use strict";
+
+  var MAIN_GENRES = ["京剧", "豫剧", "越剧", "黄梅戏", "评剧", "昆曲"];
+  var MORE_ORDER = ["曲剧", "越调", "秦腔", "河北梆子", "晋剧", "川剧", "粤剧"];
+  var GENRE_COLORS = {
+    "京剧": "#A3231A", "豫剧": "#A04A10", "越剧": "#1C6585", "黄梅戏": "#2E6E37",
+    "评剧": "#71398F", "昆曲": "#7A5410", "更多": "#4E3A2E", "收藏": "#8E1F45"
+  };
+  var LOAD_DELAY = 2.5;      // iframe 加载到出声大约要这么久,计时从这之后开始
+  var END_GRACE = 3;         // 估计唱完后再多等几秒才算结束
+  var COUNTDOWN = 8;         // 自动下一段前的倒计时
+  var SLEEP_STEPS = [0, 15, 30, 60];
+
+  var CATALOG = JSON.parse(document.getElementById("catalog").textContent);
+  var byId = {};
+  CATALOG.forEach(function (e) {
+    e.p = e.p || 1;
+    e.t = e.t || 0;
+    e.id = e.bvid + "-" + e.p + "-" + e.t;
+    byId[e.id] = e;
+  });
+
+  // ---------- 本机存储(隐私模式下可能不可用,一律兜底) ----------
+  function load(key, fallback) {
+    try { var v = localStorage.getItem("xiqu." + key); return v === null ? fallback : JSON.parse(v); }
+    catch (err) { return fallback; }
+  }
+  function save(key, value) {
+    try { localStorage.setItem("xiqu." + key, JSON.stringify(value)); } catch (err) { /* 存不了就算了 */ }
+  }
+
+  var favs = load("fav", []).filter(function (id) { return byId[id]; });
+  var prefs = load("prefs", { size: "", autoNext: true });
+
+  var $ = function (id) { return document.getElementById(id); };
+  var frame = $("frame");
+
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text !== undefined) n.textContent = text;
+    return n;
+  }
+  function minutes(sec) { return "约" + Math.max(1, Math.round(sec / 60)) + "分钟"; }
+  function segLen(e) { return Math.max(1, (e.dur || 0) - e.t); }
+  function genreOf(name) { return CATALOG.filter(function (e) { return e.genre === name; }); }
+  function genres() {
+    var seen = [];
+    CATALOG.forEach(function (e) { if (seen.indexOf(e.genre) < 0) seen.push(e.genre); });
+    return seen;
+  }
+  function moreGenres() {
+    return genres().filter(function (g) { return MAIN_GENRES.indexOf(g) < 0; }).sort(function (a, b) {
+      var ia = MORE_ORDER.indexOf(a), ib = MORE_ORDER.indexOf(b);
+      return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib);
+    });
+  }
+  function metaLine(e) {
+    var play = e.play === e.aria ? "" : "《" + e.play + "》 ";   // 「夫妻观灯」不再重复《夫妻观灯》
+    return play + e.artist + (e.school ? "（" + e.school + "）" : "");
+  }
+  function shuffle(a) {
+    a = a.slice();
+    for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; }
+    return a;
+  }
+
+  // ---------- 字号 ----------
+  function applySize() {
+    document.documentElement.className = prefs.size || "";
+    [].forEach.call($("sizeSeg").querySelectorAll("button"), function (b) {
+      b.setAttribute("aria-pressed", String((b.getAttribute("data-size") || "") === (prefs.size || "")));
+    });
+  }
+  $("sizeSeg").addEventListener("click", function (ev) {
+    var b = ev.target.closest("button");
+    if (!b) return;
+    prefs.size = b.getAttribute("data-size") || "";
+    save("prefs", prefs);
+    applySize();
+  });
+
+  // ---------- 页面切换(用 #地址,手机的返回键也能一级级退回来) ----------
+  var stack = [];
+  var replacing = false;
+  function go(hash) { location.hash = hash; }
+  function replaceHash(hash) { replacing = true; location.replace(hash); }
+  function parentOf(hash) {
+    var parts = hash.split("/");
+    if (parts[1] === "play") return state.listHash || "#/";
+    if (parts[1] === "g" && MAIN_GENRES.indexOf(decodeURIComponent(parts[2] || "")) < 0) return "#/more";
+    return "#/";
+  }
+  // 返回键防连点:老人常连按两下,第二下若在第一次跳转完成前生效,会连退两级甚至退出页面
+  var navBusy = false;
+  function backTo(target) {
+    if (navBusy) return;
+    navBusy = true;
+    setTimeout(function () { navBusy = false; }, 800);
+    if (stack.length > 1 && (!target || stack[stack.length - 2] === target)) history.back();
+    else if (target) go(target);
+    else replaceHash(parentOf(location.hash));
+  }
+  $("backBtn").addEventListener("click", function () { backTo(); });
+
+  function route() {
+    var hash = location.hash || "#/";
+    if (replacing && stack.length) stack[stack.length - 1] = hash;
+    else if (stack.length > 1 && stack[stack.length - 2] === hash) stack.pop();
+    else if (stack[stack.length - 1] !== hash) stack.push(hash);
+    replacing = false;
+    navBusy = false;
+
+    var parts = hash.split("/");
+    var page = parts[1] || "";
+    var arg = decodeURIComponent(parts[2] || "");
+    var isHome = page === "";
+
+    ["v-home", "v-more", "v-list"].forEach(function (id) { $(id).classList.remove("active"); });
+    $("backBtn").hidden = isHome;
+    $("backSpacer").hidden = !isHome;
+
+    if (page === "play" && byId[arg]) {
+      showPlayer(byId[arg]);
+    } else {
+      parkPlayer();
+      if (page === "g" && genreOf(arg).length) showList(arg, genreOf(arg), "#/g/" + encodeURIComponent(arg));
+      else if (page === "fav") showList("收藏", favs.map(function (id) { return byId[id]; }), "#/fav");
+      else if (page === "more") { $("barTitle").textContent = "更多剧种"; $("v-more").classList.add("active"); }
+      else { $("barTitle").textContent = "听戏"; renderHome(); $("v-home").classList.add("active"); }
+    }
+    window.scrollTo(0, 0);
+  }
+  window.addEventListener("hashchange", route);
+
+  // ---------- 首页 ----------
+  function tile(label, sub, color, onClick) {
+    var b = el("button", label.length > 3 ? "tile long" : "tile", label);
+    b.type = "button";
+    b.style.background = color;
+    b.appendChild(el("small", "", sub));
+    b.addEventListener("click", onClick);
+    return b;
+  }
+  function renderHome() {
+    var grid = $("genreGrid");
+    grid.innerHTML = "";
+    MAIN_GENRES.forEach(function (g) {
+      var n = genreOf(g).length;
+      if (!n) return;
+      grid.appendChild(tile(g, n + " 段名段", GENRE_COLORS[g], function () { go("#/g/" + encodeURIComponent(g)); }));
+    });
+    var more = moreGenres();
+    if (more.length) {
+      grid.appendChild(tile("更多剧种", more.slice(0, 3).join("、") + "…", GENRE_COLORS["更多"], function () { go("#/more"); }));
+    }
+    grid.appendChild(tile("我的收藏", favs.length ? favs.length + " 段" : "还没有", GENRE_COLORS["收藏"], function () { go("#/fav"); }));
+
+    var mg = $("moreGrid");
+    mg.innerHTML = "";
+    more.forEach(function (g) {
+      mg.appendChild(tile(g, genreOf(g).length + " 段名段", GENRE_COLORS["更多"], function () { go("#/g/" + encodeURIComponent(g)); }));
+    });
+
+    var box = $("resume");
+    box.innerHTML = "";
+    var last = load("last", null);
+    var e = last && byId[last.id];
+    if (e && !(state.cur && state.playing)) {
+      var b = el("button", "wide light");
+      b.type = "button";
+      b.appendChild(document.createTextNode("接着听上次的"));
+      b.appendChild(el("span", "sub", "「" + e.aria + "」 " + e.artist));
+      b.addEventListener("click", function () {
+        var list = last.queue && last.queue.filter(function (id) { return byId[id]; });
+        startQueue(list && list.length ? list : genreOf(e.genre).map(function (x) { return x.id; }), e.id, last.pos || 0, last.listHash);
+      });
+      box.appendChild(b);
+    }
+  }
+  $("randomBtn").addEventListener("click", function () {
+    var ids = shuffle(CATALOG).map(function (e) { return e.id; });
+    startQueue(ids, ids[0], 0, "#/");
+  });
+
+  // ---------- 唱段列表 ----------
+  function showList(title, entries, hash) {
+    $("barTitle").textContent = title;
+    $("listTitle").textContent = title === "收藏" ? "我收藏的唱段" : title + " · 名家名段";
+    var ol = $("list");
+    ol.innerHTML = "";
+    $("playAllBtn").hidden = !entries.length;
+    if (!entries.length) {
+      var li = el("li");
+      li.appendChild(el("div", "empty", "还没有收藏。听戏的时候点一下「收藏」，这段戏就会出现在这里。"));
+      ol.appendChild(li);
+    }
+    entries.forEach(function (e) {
+      var li = el("li");
+      var b = el("button", "item" + (state.cur && state.cur.id === e.id ? " on" : ""));
+      b.type = "button";
+      b.appendChild(el("span", "a", "「" + e.aria + "」"));
+      b.appendChild(el("span", "m", metaLine(e)));
+      b.appendChild(el("span", "d", minutes(segLen(e)) + (e.note ? " · " + e.note : "")));
+      b.addEventListener("click", function () {
+        startQueue(entries.map(function (x) { return x.id; }), e.id, 0, hash);
+      });
+      li.appendChild(b);
+      ol.appendChild(li);
+    });
+    $("playAllBtn").onclick = function () {
+      startQueue(entries.map(function (x) { return x.id; }), entries[0].id, 0, hash);
+    };
+    $("v-list").classList.add("active");
+  }
+
+  // ---------- 播放 ----------
+  // B 站嵌入播放器是跨域 iframe,外面拿不到它的播放进度和结束事件,
+  // 所以这里按「加载时刻 + 唱段时长」估算进度:暂停 = 卸载播放器并记下位置,继续 = 从该位置重新加载。
+  var state = {
+    queue: [], idx: 0, cur: null, listHash: "#/",
+    playing: false, startedAt: 0, base: 0, pausedAt: 0,
+    ended: false, countdown: 0, sleepEnd: 0, sleepStep: 0
+  };
+  var wakeLock = null;
+
+  function embedUrl(e, offset) {
+    return "https://player.bilibili.com/player.html?isOutside=true&bvid=" + e.bvid +
+      "&p=" + e.p + "&t=" + Math.floor(e.t + offset) + "&autoplay=1&danmaku=0";
+  }
+  function elapsed() {
+    if (!state.playing) return state.pausedAt;
+    return state.base + Math.max(0, (Date.now() - state.startedAt) / 1000);
+  }
+  function startQueue(ids, id, offset, listHash) {
+    state.queue = ids;
+    state.listHash = listHash || "#/";
+    loadEntry(byId[id], offset || 0);
+    go("#/play/" + id);
+  }
+  function loadEntry(e, offset) {
+    offset = Math.max(0, Math.min(offset, segLen(e) - 10));
+    state.cur = e;
+    state.idx = Math.max(0, state.queue.indexOf(e.id));
+    state.playing = true;
+    state.ended = false;
+    state.countdown = 0;
+    state.base = offset;
+    state.startedAt = Date.now() + LOAD_DELAY * 1000;
+    $("overlay").hidden = true;
+    $("banner").hidden = true;
+    frame.src = embedUrl(e, offset);
+    keepAwake(true);
+    remember();
+    paintPlayer();
+  }
+  function pause() {
+    if (!state.cur || !state.playing) return;
+    state.pausedAt = elapsed();
+    state.playing = false;
+    state.countdown = 0;
+    $("banner").hidden = true;
+    frame.src = "about:blank";
+    keepAwake(false);
+    remember();
+    showOverlay("已经暂停了", "点下面的「继续听」，接着往下唱");
+    paintPlayer();
+  }
+  function resume() {
+    if (!state.cur) return;
+    loadEntry(state.cur, state.ended ? 0 : state.pausedAt - 3);
+  }
+  function step(delta) {
+    if (!state.queue.length) return;
+    var i = (state.idx + delta + state.queue.length) % state.queue.length;
+    var e = byId[state.queue[i]];
+    loadEntry(e, 0);
+    replaceHash("#/play/" + e.id);
+  }
+  function stopAll(message) {
+    pause();
+    $("mini").hidden = true;
+    if (message) showOverlay(message, "想再听，点下面的红色大按钮");
+  }
+  function showOverlay(title, sub) {
+    var o = $("overlay");
+    o.innerHTML = "";
+    o.appendChild(el("div", "", title));
+    o.appendChild(el("div", "", sub));
+    o.hidden = false;
+  }
+  function remember() {
+    if (!state.cur) return;
+    save("last", { id: state.cur.id, pos: Math.floor(elapsed()), queue: state.queue, listHash: state.listHash });
+  }
+
+  function showPlayer(e) {
+    if (!state.cur || state.cur.id !== e.id) {
+      // 直接打开分享来的播放地址时:队列用该剧种
+      if (state.queue.indexOf(e.id) < 0) {
+        state.queue = genreOf(e.genre).map(function (x) { return x.id; });
+        state.listHash = "#/g/" + encodeURIComponent(e.genre);
+      }
+      loadEntry(e, 0);
+    }
+    $("barTitle").textContent = e.genre;
+    $("v-player").classList.remove("parked");
+    $("mini").hidden = true;
+    paintPlayer();
+  }
+  function parkPlayer() {
+    $("v-player").classList.add("parked");
+    $("mini").hidden = !(state.cur && state.playing);
+    if (state.cur) $("miniTitle").textContent = "「" + state.cur.aria + "」 " + state.cur.artist;
+  }
+
+  function paintPlayer() {
+    var e = state.cur;
+    if (!e) return;
+    $("pAria").textContent = "「" + e.aria + "」";
+    $("pMeta").textContent = metaLine(e) + " · " + minutes(segLen(e));
+    $("pSrc").textContent = "来源：哔哩哔哩 · " + e.src;
+    var pb = $("playBtn");
+    pb.innerHTML = state.playing
+      ? '<svg><use href="#i-pause"/></svg>暂停一下'
+      : '<svg><use href="#i-play"/></svg>' + (state.ended ? "再听一遍" : "继续听");
+    var many = state.queue.length > 1;
+    $("prevBtn").disabled = !many;
+    $("nextBtn").disabled = !many;
+    $("nextBtn").classList.toggle("pulse", state.ended && many);
+    var fav = favs.indexOf(e.id) >= 0;
+    twoLine($("favBtn"), fav ? "★ 已收藏" : "☆ 收藏", fav ? "再点就取消" : "存起来常听", fav);
+    var left = state.sleepEnd ? Math.max(1, Math.ceil((state.sleepEnd - Date.now()) / 60000)) : 0;
+    twoLine($("sleepBtn"), "定时停止", left ? "还剩" + left + "分钟" : "现在不定时", !!left);
+    twoLine($("autoBtn"), "自动下一段", prefs.autoNext ? "现在开着" : "现在关着", !!prefs.autoNext);
+  }
+  function twoLine(btn, main, sub, pressed) {
+    btn.textContent = main;
+    btn.appendChild(el("small", "", sub));
+    btn.setAttribute("aria-pressed", String(pressed));
+  }
+
+  $("playBtn").addEventListener("click", function () { if (state.playing) pause(); else resume(); });
+  $("prevBtn").addEventListener("click", function () { step(-1); });
+  $("nextBtn").addEventListener("click", function () { step(1); });
+  $("listBtn").addEventListener("click", function () { backTo(state.listHash); });
+  $("favBtn").addEventListener("click", function () {
+    var id = state.cur && state.cur.id;
+    if (!id) return;
+    var i = favs.indexOf(id);
+    if (i >= 0) favs.splice(i, 1); else favs.push(id);
+    save("fav", favs);
+    paintPlayer();
+  });
+  $("sleepBtn").addEventListener("click", function () {
+    state.sleepStep = (state.sleepStep + 1) % SLEEP_STEPS.length;
+    var m = SLEEP_STEPS[state.sleepStep];
+    state.sleepEnd = m ? Date.now() + m * 60000 : 0;
+    paintPlayer();
+  });
+  $("autoBtn").addEventListener("click", function () {
+    prefs.autoNext = !prefs.autoNext;
+    save("prefs", prefs);
+    if (!prefs.autoNext && state.countdown) { state.countdown = 0; showEnded(); }
+    paintPlayer();
+  });
+  $("miniOpen").addEventListener("click", function () { if (state.cur) go("#/play/" + state.cur.id); });
+  $("miniStop").addEventListener("click", function () { stopAll(); });
+
+  function showEnded() {
+    var b = $("banner");
+    b.innerHTML = "";
+    b.appendChild(el("div", "", "这一段唱完了。想听下一段，点「下一段」。"));
+    b.hidden = false;
+    paintPlayer();
+  }
+  // 倒计时横幅只建一次、每秒只改文字:整块重建会让老人按到一半的「不要接着放」失效
+  var countdownText = null;
+  function showCountdown(first) {
+    var b = $("banner");
+    var next = byId[state.queue[(state.idx + 1) % state.queue.length]];
+    if (first || !countdownText || countdownText.parentNode !== b) {
+      b.innerHTML = "";
+      countdownText = el("div");
+      b.appendChild(countdownText);
+      var cancel = el("button", "", "不要接着放，停在这里");
+      cancel.type = "button";
+      cancel.addEventListener("click", function () {
+        state.countdown = 0;
+        stopAll("这一段唱完了");
+        state.ended = true;
+        paintPlayer();
+      });
+      b.appendChild(cancel);
+      b.hidden = false;
+    }
+    countdownText.textContent = state.countdown + " 秒后接着放：「" + next.aria + "」 " + next.artist;
+  }
+
+  // 每秒一跳:估算是否唱完、倒计时、定时停止、记住位置
+  var ticks = 0;
+  setInterval(function () {
+    if (state.sleepEnd && Date.now() >= state.sleepEnd) {
+      state.sleepEnd = 0;
+      state.sleepStep = 0;
+      stopAll("定时到了，已经停了");
+    }
+    if (!state.cur || !state.playing) return;
+    ticks++;
+    if (ticks % 5 === 0) remember();
+    if (ticks % 30 === 0) paintPlayer();   // 刷新「还剩几分钟」
+    if (state.countdown > 0) {
+      state.countdown--;
+      if (state.countdown === 0) step(1); else showCountdown();
+      return;
+    }
+    if (!state.ended && elapsed() >= segLen(state.cur) + END_GRACE) {
+      state.ended = true;
+      if (prefs.autoNext && state.queue.length > 1) { state.countdown = COUNTDOWN; showCountdown(true); }
+      else { showEnded(); }
+    }
+  }, 1000);
+
+  // 放戏时不让屏幕自动熄灭(手机锁屏后浏览器会把视频停掉)
+  function keepAwake(on) {
+    if (!("wakeLock" in navigator)) return;
+    if (on && !wakeLock) {
+      navigator.wakeLock.request("screen").then(function (lock) {
+        wakeLock = lock;
+        lock.addEventListener("release", function () { wakeLock = null; });
+      }).catch(function () {});
+    } else if (!on && wakeLock) {
+      wakeLock.release().catch(function () {});
+      wakeLock = null;
+    }
+  }
+  document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "visible" && state.playing) keepAwake(true);
+  });
+
+  applySize();
+  route();
+})();
+</script>
+</body>
+</html>
